@@ -27,8 +27,7 @@ var cohesion: float;
 @export
 var targeting: float;
 
-var protection_boids: Array[Node2D];
-var visual_boids: Array[Node2D];
+var flock: Array[Node2D];
 var separation_velocity: Vector2;
 var alignment_velocity: Vector2;
 var cohesion_velocity: Vector2;
@@ -36,72 +35,63 @@ var cohesion_velocity: Vector2;
 var target: Node2D;
 var targeting_velocity: Vector2;
 	
-func _on_visual_disc_area_entered(area):
-	var candidate = area.get_parent();
-	if candidate == self:
-		return;
-	if not candidate.is_in_group("boid"):
-		return;
-	if not candidate in visual_boids:
-		visual_boids.append(candidate);
-func _on_visual_disc_area_exited(area):
-	var candidate = area.get_parent();
-	if candidate == self:
-		return;
-	if candidate in visual_boids:
-		visual_boids.erase(candidate);
-func _on_protection_disc_area_entered(area):
-	var candidate = area.get_parent();
-	if candidate == self:
-		return;
-	if not candidate in protection_boids:
-		protection_boids.append(candidate);
-func _on_protection_disc_area_exited(area):
-	var candidate = area.get_parent();
-	if candidate == self:
-		return;
-	if candidate in protection_boids:
-		protection_boids.erase(candidate);
-
+func poll_flock():
+	flock = [];
+	var candidates = visual_disc.get_overlapping_bodies();
+	for item in candidates:
+		if item.is_in_group("boid"):
+			flock.append(item);
+			
+func is_in_visual(boid):
+	var sep = body.global_position - boid.global_position;
+	return sep.length() <= visual_range;
+func is_in_protection(boid):
+	var sep = body.global_position - boid.global_position;
+	return sep.length() <= protection_range;
+	
 func find_discs():
 	visual_disc = get_node("VisualDisc");
 	protection_disc = get_node("ProtectionDisc");
-
 func resize_discs():
 	visual_disc.get_node("CollisionShape2D").shape.radius = visual_range;
 	protection_disc.get_node("CollisionShape2D").shape.radius = protection_range;
 	
 func separation_pass():
 	separation_velocity = Vector2.ZERO;
-	if protection_boids.is_empty():
-		return;
-	for boid in protection_boids:
-		separation_velocity += body.global_position - boid.body.global_position;
+	for boid in flock:
+		if is_in_protection(boid):
+			var sep = body.global_position - boid.global_position;
+			separation_velocity += sep * separation;
 	
 func alignment_pass():
 	alignment_velocity = Vector2.ZERO;
-	if visual_boids.is_empty():
-		return;
-	for boid in visual_boids:
-		alignment_velocity += boid.body.velocity;
-	alignment_velocity /= len(visual_boids);
-	#alignment_velocity -= body.velocity;
+	var mean = Vector2.ZERO;
+	var count = 0;
+	for boid in flock:
+		if is_in_visual(boid) and not is_in_protection(boid):
+			mean += boid.velocity;
+			count += 1;
+	if count != 0:
+		mean /= count;
+		alignment_velocity = (mean - body.velocity) * alignment;
 	
 func cohesion_pass():
-	cohesion_velocity = Vector2.ZERO;
-	if visual_boids.is_empty():
-		return;
+	cohesion_velocity = Vector2.ZERO;		
 	var centroid = Vector2.ZERO;
-	for boid in visual_boids:
-		centroid += boid.body.global_position;
-	centroid /= len(visual_boids);
-	cohesion_velocity = (centroid - body.global_position) * cohesion;
+	var count = 0;
+	for boid in flock:
+		if is_in_visual(boid) and not is_in_protection(boid):
+			centroid += boid.global_position;
+			count += 1;
+	if count != 0:
+		centroid /= count;
+		cohesion_velocity = (centroid - body.global_position) * cohesion;
 	
 func targeting_pass():
 	targeting_velocity = Vector2.ZERO;
 	if target != null:
 		var line = target.global_position - body.global_position;
-		if line.length() <= visual_range:		
+		if line.length() <= visual_range:
 			targeting_velocity = (target.global_position - body.global_position) * targeting;
 
 # Called when the node enters the scene tree for the first time.
@@ -109,10 +99,6 @@ func _ready() -> void:
 	body = get_parent();
 	find_discs();
 	resize_discs();
-	visual_disc.area_entered.connect(_on_visual_disc_area_entered);
-	visual_disc.area_exited.connect(_on_visual_disc_area_exited);
-	protection_disc.area_entered.connect(_on_protection_disc_area_entered);
-	protection_disc.area_exited.connect(_on_protection_disc_area_exited);
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -122,10 +108,13 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	if not Engine.is_editor_hint():
-		#separation_pass();
+		poll_flock();
+		
+		separation_pass();
 		alignment_pass();
 		cohesion_pass();
 		targeting_pass();
+		
 		var velocity = (
 			separation_velocity +
 			alignment_velocity +

@@ -16,7 +16,7 @@ radius = 800.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7vc4j"]
 
-[node name="Enemy" type="CharacterBody2D" unique_id=2072336256 groups=["enemy"]]
+[node name="Enemy" type="CharacterBody2D" unique_id=2072336256 groups=["boid", "enemy"]]
 collision_layer = 4
 script = ExtResource("1_2mvqj")
 
@@ -27,7 +27,7 @@ shape = SubResource("CircleShape2D_iemci")
 modulate = Color(1, 0, 0, 1)
 texture = ExtResource("2_ufdl5")
 
-[node name="Boid" type="Node2D" parent="." unique_id=1321923868 groups=["boid"]]
+[node name="Boid" type="Node2D" parent="." unique_id=1321923868]
 script = ExtResource("2_p1h7c")
 group = "enemy"
 protection_range = 200.0

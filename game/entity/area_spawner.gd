@@ -33,7 +33,7 @@ func trigger_spawns():
 		var resource = pair[0];
 		var position = pair[1];
 		var instance = resource.instantiate();
-		add_child(instance);
+		call_deferred("add_child", instance);
 		instance.position = position;
 		spawn.emit();
 		spawn_queue.pop_front();
