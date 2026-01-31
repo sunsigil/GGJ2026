@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 var walker;
 var dasher;
+var attacker;
+var orbital;
 
 enum PlayerState {
 	WALK,
@@ -13,10 +15,12 @@ var state: PlayerState = PlayerState.WALK;
 func _ready() -> void:
 	walker = get_node("Walker");
 	dasher = get_node("Dasher");
+	attacker = get_node("Attacker");
+	orbital = get_node("Orbital");
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	pass;
 	
 func _physics_process(delta):
 	match state:
@@ -30,3 +34,7 @@ func _physics_process(delta):
 				state = PlayerState.WALK;
 	rotation = velocity.angle();
 	move_and_slide();
+	
+	if Input.is_action_just_pressed("game_attack"):
+		var trajectory = orbital.global_position - global_position;
+		attacker.launch(trajectory);

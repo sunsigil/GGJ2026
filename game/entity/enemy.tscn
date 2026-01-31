@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://60w6hg83fjab" path="res://entity/enemy.gd" id="1_2mvqj"]
 [ext_resource type="Script" uid="uid://c61xdep8dpcju" path="res://entity/boid.gd" id="2_p1h7c"]
 [ext_resource type="Texture2D" uid="uid://dixbv6fkide1o" path="res://icon.svg" id="2_ufdl5"]
+[ext_resource type="Script" uid="uid://b6ao3g32l7aqs" path="res://entity/lifeforce.gd" id="4_iemci"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_iemci"]
 radius = 63.007935
@@ -13,17 +14,21 @@ radius = 200.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_ufdl5"]
 radius = 800.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_7vc4j"]
+
 [node name="Enemy" type="CharacterBody2D" unique_id=2072336256 groups=["enemy"]]
+collision_layer = 4
+collision_mask = 7
 script = ExtResource("1_2mvqj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2120428734]
+shape = SubResource("CircleShape2D_iemci")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1694978609]
 modulate = Color(1, 0, 0, 1)
 texture = ExtResource("2_ufdl5")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2120428734]
-shape = SubResource("CircleShape2D_iemci")
-
-[node name="Boid" type="Node2D" parent="." unique_id=1321923868]
+[node name="Boid" type="Node2D" parent="." unique_id=1321923868 groups=["boid"]]
 script = ExtResource("2_p1h7c")
 group = "enemy"
 protection_range = 200.0
@@ -34,11 +39,25 @@ cohesion = 0.005
 targeting = 0.05
 
 [node name="ProtectionDisc" type="Area2D" parent="Boid" unique_id=1791562951]
+collision_layer = 4
+collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boid/ProtectionDisc" unique_id=1222765020]
 shape = SubResource("CircleShape2D_afxr3")
 
 [node name="VisualDisc" type="Area2D" parent="Boid" unique_id=1432652793]
+collision_layer = 4
+collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boid/VisualDisc" unique_id=1605761476]
 shape = SubResource("CircleShape2D_ufdl5")
+
+[node name="Lifeforce" type="Node2D" parent="." unique_id=200005520]
+script = ExtResource("4_iemci")
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=501736169]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1657314520]
+shape = SubResource("CircleShape2D_7vc4j")

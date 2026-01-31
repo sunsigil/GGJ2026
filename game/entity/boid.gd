@@ -40,30 +40,28 @@ func _on_visual_disc_area_entered(area):
 	var candidate = area.get_parent();
 	if candidate == self:
 		return;
+	if not candidate.is_in_group("boid"):
+		return;
 	if not candidate in visual_boids:
 		visual_boids.append(candidate);
-		print("Visual enter");
 func _on_visual_disc_area_exited(area):
 	var candidate = area.get_parent();
 	if candidate == self:
 		return;
 	if candidate in visual_boids:
 		visual_boids.erase(candidate);
-		print("Visual exit");
 func _on_protection_disc_area_entered(area):
 	var candidate = area.get_parent();
 	if candidate == self:
 		return;
 	if not candidate in protection_boids:
 		protection_boids.append(candidate);
-		print("Protection enter");
 func _on_protection_disc_area_exited(area):
 	var candidate = area.get_parent();
 	if candidate == self:
 		return;
 	if candidate in protection_boids:
 		protection_boids.erase(candidate);
-		print("Protection exit");
 
 func find_discs():
 	visual_disc = get_node("VisualDisc");
@@ -79,7 +77,6 @@ func separation_pass():
 		return;
 	for boid in protection_boids:
 		separation_velocity += body.global_position - boid.body.global_position;
-	print("Separation");
 	
 func alignment_pass():
 	alignment_velocity = Vector2.ZERO;
@@ -89,7 +86,6 @@ func alignment_pass():
 		alignment_velocity += boid.body.velocity;
 	alignment_velocity /= len(visual_boids);
 	#alignment_velocity -= body.velocity;
-	print("Alignment");
 	
 func cohesion_pass():
 	cohesion_velocity = Vector2.ZERO;
@@ -100,7 +96,6 @@ func cohesion_pass():
 		centroid += boid.body.global_position;
 	centroid /= len(visual_boids);
 	cohesion_velocity = (centroid - body.global_position) * cohesion;
-	print("Cohesion");
 	
 func targeting_pass():
 	targeting_velocity = Vector2.ZERO;
@@ -108,7 +103,6 @@ func targeting_pass():
 		var line = target.global_position - body.global_position;
 		if line.length() <= visual_range:		
 			targeting_velocity = (target.global_position - body.global_position) * targeting;
-	print("Targeting");
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

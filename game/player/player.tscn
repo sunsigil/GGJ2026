@@ -5,11 +5,14 @@
 [ext_resource type="Script" uid="uid://c4yxg3e8kh1i6" path="res://player/player.gd" id="3_qjkh3"]
 [ext_resource type="PackedScene" uid="uid://ufp8m6ordesh" path="res://player/orbital.tscn" id="4_yw30f"]
 [ext_resource type="Script" uid="uid://bfrxuiggbibdx" path="res://player/dasher.gd" id="5_qjkh3"]
+[ext_resource type="Script" uid="uid://dnce4g5774p1a" path="res://player/attacker.gd" id="6_g6k8r"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yw30f"]
 radius = 64.00781
 
 [node name="Player" type="CharacterBody2D" unique_id=61600611 groups=["player"]]
+collision_layer = 2
+collision_mask = 7
 motion_mode = 1
 script = ExtResource("3_qjkh3")
 
@@ -31,3 +34,9 @@ radius = 150.0
 [node name="Sprite2D" type="Sprite2D" parent="Orbital" unique_id=1672288913]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_yw30f")
+
+[node name="Attacker" type="Node2D" parent="." unique_id=1873064276]
+script = ExtResource("6_g6k8r")
+mask = 4
+damage = 50.0
+range = 800.0
