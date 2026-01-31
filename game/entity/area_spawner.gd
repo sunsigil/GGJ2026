@@ -1,8 +1,13 @@
+@tool
 extends Node2D
 
 var trigger_area: Area2D;
 var spawn_area: Area2D;
 
+@export
+var trigger_radius: float = 800;
+@export
+var spawn_radius: float = 600;
 @export
 var pool: Array[Resource];
 @export
@@ -22,7 +27,7 @@ func trigger_spawns():
 	var angle = randf() * 2 * PI;
 	for i in capacity:
 		var resource = pool.pick_random();
-		var radius = randf() * spawn_area.get_node("CollisionShape2D").shape.radius;
+		var radius = randf() * spawn_radius;
 		var position = radius * Vector2(cos(angle), sin(angle));
 		angle += 2 * PI / capacity;
 		spawn_queue.append([resource, position]);
@@ -53,5 +58,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	trigger_area.get_node("CollisionShape2D").shape.radius = trigger_radius;
+	spawn_area.get_node("CollisionShape2D").shape.radius = spawn_radius;
 	pass;
 	

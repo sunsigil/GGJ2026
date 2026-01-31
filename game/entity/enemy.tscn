@@ -30,12 +30,13 @@ texture = ExtResource("2_ufdl5")
 [node name="Boid" type="Node2D" parent="." unique_id=1321923868]
 script = ExtResource("2_p1h7c")
 group = "enemy"
+min_speed = 400.0
 protection_range = 200.0
 visual_range = 800.0
-separation = 0.05
-alignment = 0.05
-cohesion = 0.005
-targeting = 0.05
+separation = 1.0
+alignment = 0.1
+cohesion = 0.1
+targeting = 0.1
 
 [node name="ProtectionDisc" type="Area2D" parent="Boid" unique_id=1791562951]
 collision_layer = 4

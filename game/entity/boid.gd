@@ -27,13 +27,8 @@ var cohesion: float;
 @export
 var targeting: float;
 
-var flock: Array[Node2D];
-var separation_velocity: Vector2;
-var alignment_velocity: Vector2;
-var cohesion_velocity: Vector2;
-
 var target: Node2D;
-var targeting_velocity: Vector2;
+var flock: Array[Node2D];
 	
 func poll_flock():
 	flock = [];
@@ -57,26 +52,26 @@ func resize_discs():
 	protection_disc.get_node("CollisionShape2D").shape.radius = protection_range;
 	
 func separation_pass():
-	separation_velocity = Vector2.ZERO;
+	var separation_velocity = Vector2.ZERO;
 	for boid in flock:
 		if is_in_protection(boid):
 			var sep = body.global_position - boid.global_position;
-			separation_velocity += sep * separation;
+			separation_velocity += sep;
+	body.velocity += separation_velocity * separation;
 	
 func alignment_pass():
-	alignment_velocity = Vector2.ZERO;
-	var mean = Vector2.ZERO;
+	var alignment_velocity = Vector2.ZERO;
 	var count = 0;
 	for boid in flock:
 		if is_in_visual(boid) and not is_in_protection(boid):
-			mean += boid.velocity;
+			alignment_velocity += boid.velocity;
 			count += 1;
 	if count != 0:
-		mean /= count;
-		alignment_velocity = (mean - body.velocity) * alignment;
+		alignment_velocity /= count;
+	body.velocity += (alignment_velocity - body.velocity) * alignment;
 	
 func cohesion_pass():
-	cohesion_velocity = Vector2.ZERO;		
+	var cohesion_velocity = Vector2.ZERO;		
 	var centroid = Vector2.ZERO;
 	var count = 0;
 	for boid in flock:
@@ -85,14 +80,14 @@ func cohesion_pass():
 			count += 1;
 	if count != 0:
 		centroid /= count;
-		cohesion_velocity = (centroid - body.global_position) * cohesion;
+		cohesion_velocity = centroid - body.global_position;
+	body.velocity += cohesion_velocity * cohesion;
 	
 func targeting_pass():
-	targeting_velocity = Vector2.ZERO;
 	if target != null:
 		var line = target.global_position - body.global_position;
-		if line.length() <= visual_range:
-			targeting_velocity = (target.global_position - body.global_position) * targeting;
+		if line.length() <= (visual_range * 2):
+			body.velocity += (target.global_position - body.global_position) * targeting;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -105,6 +100,10 @@ func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		find_discs();
 		resize_discs();
+	queue_redraw();
+
+func _draw():
+	draw_line(Vector2.ZERO, body.velocity.normalized() * 400, Color.RED);
 
 func _physics_process(delta: float) -> void:
 	if not Engine.is_editor_hint():
@@ -115,16 +114,9 @@ func _physics_process(delta: float) -> void:
 		cohesion_pass();
 		targeting_pass();
 		
-		var velocity = (
-			separation_velocity +
-			alignment_velocity +
-			cohesion_velocity +
-			targeting_velocity
-		);
-		var speed = velocity.length();
+		var speed = body.velocity.length();
 		if speed < min_speed:
-			velocity = velocity.normalized() * min_speed;
+			body.velocity = body.velocity.normalized() * min_speed;
 		if speed > max_speed:
-			velocity = velocity.normalized() * max_speed;
-		body.velocity = velocity;
+			body.velocity = body.velocity.normalized() * max_speed;
 		
