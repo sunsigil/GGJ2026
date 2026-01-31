@@ -9,19 +9,20 @@ var damage: float;
 @export
 var range: float;
 
-var last_start;
-var last_ray;
-
 func launch(direction):
 	var space = get_world_2d().direct_space_state;
 	var start = body.global_position;
-	var ray = direction.normalized() * range;
+	var ray = start + direction * range;
 	var query = PhysicsRayQueryParameters2D.create(start, start+ray, mask);
 	var result = space.intersect_ray(query);
 	if result:
-		result.collider.receive_hit(damage);
-	last_start = body.global_position;
-	last_ray = ray;
+		var attack = Attack.new(
+			body,
+			start, direction,
+			range,
+			damage
+		);
+		result.collider.queue_attack(attack);
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -29,7 +30,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	pass;
 	
 func _draw():
 	pass;
