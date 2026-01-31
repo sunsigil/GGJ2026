@@ -2,8 +2,8 @@
 extends Node2D
 
 var body;
-var visual_disc: CollisionObject2D;
-var protection_disc: CollisionObject2D;
+var visual_disc: Area2D;
+var protection_disc: Area2D;
 
 @export
 var group: String;

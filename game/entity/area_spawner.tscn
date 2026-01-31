@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://ct32260c6xtbk"]
+
+[ext_resource type="Script" uid="uid://0pngorj6qx0x" path="res://entity/area_spawner.gd" id="1_e6m2s"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e6m2s"]
+radius = 600.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oqqrr"]
+radius = 400.0
+
+[node name="AreaSpawner" type="Node2D" unique_id=928594478]
+script = ExtResource("1_e6m2s")
+
+[node name="TriggerArea" type="Area2D" parent="." unique_id=1815192807]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea" unique_id=114908085]
+shape = SubResource("CircleShape2D_e6m2s")
+debug_color = Color(0.8212622, 0.33676764, 1.92523e-07, 0.41960785)
+
+[node name="SpawnArea" type="Area2D" parent="." unique_id=680181846]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnArea" unique_id=570257474]
+shape = SubResource("CircleShape2D_oqqrr")
+debug_color = Color(0.3565562, 0.58129966, 1.92523e-07, 0.41960785)
