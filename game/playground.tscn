@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://hgrkrvcswfk1"]
+
+[ext_resource type="PackedScene" uid="uid://dy3xhhvo4tlg2" path="res://player/camera.tscn" id="3_is3ju"]
+[ext_resource type="PackedScene" uid="uid://da5da4t1ah381" path="res://greyboxing/wall.tscn" id="3_m8u5f"]
+[ext_resource type="PackedScene" uid="uid://csyjusrfcxdi8" path="res://player/player.tscn" id="4_is3ju"]
+[ext_resource type="PackedScene" uid="uid://dtgywicxqs50" path="res://entity/enemy.tscn" id="6_ynsuh"]
+
+[node name="Playground" type="Node2D" unique_id=1159659867]
+
+[node name="Player" parent="." unique_id=395614979 instance=ExtResource("4_is3ju")]
+
+[node name="Camera" parent="." unique_id=596543648 node_paths=PackedStringArray("target") instance=ExtResource("3_is3ju")]
+zoom = Vector2(0.5, 0.5)
+target = NodePath("../Player")
+
+[node name="Enemy2" parent="." unique_id=2072336256 instance=ExtResource("6_ynsuh")]
+position = Vector2(-573, 451)
+
+[node name="Enemy" parent="." unique_id=294014635 instance=ExtResource("6_ynsuh")]
+position = Vector2(-541, -167)
+
+[node name="Enemy3" parent="." unique_id=1751403808 instance=ExtResource("6_ynsuh")]
+position = Vector2(-1097, 46)
+
+[node name="Environment" type="Node" parent="." unique_id=2067740291]
+
+[node name="Wall" parent="Environment" unique_id=1058521146 instance=ExtResource("3_m8u5f")]
+position = Vector2(-40, 955)
+scale = Vector2(24.320002, 1)
+
+[node name="Wall2" parent="Environment" unique_id=1196461258 instance=ExtResource("3_m8u5f")]
+position = Vector2(-21.000002, -944.9999)
+scale = Vector2(24.320002, 1)
+
+[node name="Wall3" parent="Environment" unique_id=1816474691 instance=ExtResource("3_m8u5f")]
+position = Vector2(1969.9999, -334.99994)
+rotation = 0.9023401
+scale = Vector2(24.320002, 1)
+
+[node name="Wall4" parent="Environment" unique_id=2097864725 instance=ExtResource("3_m8u5f")]
+position = Vector2(1984, 378)
+rotation = 2.2765126
+scale = Vector2(24.320002, 1)
+
+[node name="Wall5" parent="Environment" unique_id=972477879 instance=ExtResource("3_m8u5f")]
+position = Vector2(-1569.0002, -36)
+rotation = 1.5442963
+scale = Vector2(24.320002, 1)

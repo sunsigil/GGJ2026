@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://csyjusrfcxdi8"]
+
+[ext_resource type="Script" uid="uid://crgabanmakce3" path="res://player/walker.gd" id="1_g1dw6"]
+[ext_resource type="Texture2D" uid="uid://dixbv6fkide1o" path="res://icon.svg" id="2_yw30f"]
+[ext_resource type="Script" uid="uid://c4yxg3e8kh1i6" path="res://player/player.gd" id="3_qjkh3"]
+[ext_resource type="PackedScene" uid="uid://ufp8m6ordesh" path="res://player/orbital.tscn" id="4_yw30f"]
+[ext_resource type="Script" uid="uid://bfrxuiggbibdx" path="res://player/dasher.gd" id="5_qjkh3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yw30f"]
+radius = 64.00781
+
+[node name="Player" type="CharacterBody2D" unique_id=61600611 groups=["player"]]
+motion_mode = 1
+script = ExtResource("3_qjkh3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1636976208]
+shape = SubResource("CircleShape2D_yw30f")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=206495934]
+texture = ExtResource("2_yw30f")
+
+[node name="Walker" type="Node2D" parent="." unique_id=2031330480]
+script = ExtResource("1_g1dw6")
+
+[node name="Dasher" type="Node2D" parent="." unique_id=1930888167]
+script = ExtResource("5_qjkh3")
+
+[node name="Orbital" parent="." unique_id=1642983030 instance=ExtResource("4_yw30f")]
+radius = 150.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Orbital" unique_id=1672288913]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_yw30f")

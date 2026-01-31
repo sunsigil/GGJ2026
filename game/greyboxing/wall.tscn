@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://da5da4t1ah381"]
+
+[ext_resource type="Shader" uid="uid://lmfpgus2w4fm" path="res://materials/checkers.gdshader" id="1_qttw5"]
+[ext_resource type="Texture2D" uid="uid://dixbv6fkide1o" path="res://icon.svg" id="2_isr6t"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wt17y"]
+shader = ExtResource("1_qttw5")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m8u5f"]
+size = Vector2(128, 128)
+
+[node name="Wall" type="Node2D" unique_id=1058521146]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1171070854]
+material = SubResource("ShaderMaterial_wt17y")
+texture = ExtResource("2_isr6t")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=989353424]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=213976124]
+shape = SubResource("RectangleShape2D_m8u5f")

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cqax2shxhbqrm"]
+
+[ext_resource type="Script" uid="uid://crgabanmakce3" path="res://player/walker.gd" id="2_16tco"]
+
+[node name="Walker" type="Node2D" unique_id=1008795349]
+script = ExtResource("2_16tco")

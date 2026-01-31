@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ufp8m6ordesh"]
+
+[ext_resource type="Script" uid="uid://mxrnmos8bqh6" path="res://player/orbital.gd" id="1_l814e"]
+
+[node name="Orbital" type="Node2D" unique_id=1642983030]
+script = ExtResource("1_l814e")
