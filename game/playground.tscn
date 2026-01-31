@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://03sww27hrpsl" path="res://materials/environment/wip-fg.png" id="5_4bqqs"]
 [ext_resource type="Texture2D" uid="uid://bsec5qxgpch5u" path="res://materials/environment/wip-bg.png" id="5_o00ia"]
 [ext_resource type="Texture2D" uid="uid://go46hmeh5c4y" path="res://materials/environment/wip-spawn.png" id="7_ynsuh"]
+[ext_resource type="PackedScene" uid="uid://c3byvsma7wkm4" path="res://entity/point_spawner.tscn" id="8_v7dth"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_is3ju"]
 radius = 170.37175
@@ -54,6 +55,53 @@ capacity = 10
 position = Vector2(2210, 43)
 pool = Array[Resource]([ExtResource("4_o00ia")])
 capacity = 10
+
+[node name="AreaSpawner3" parent="Spawners" unique_id=940033405 instance=ExtResource("3_o00ia")]
+position = Vector2(2569, 3098)
+pool = Array[Resource]([ExtResource("4_o00ia")])
+capacity = 10
+
+[node name="AreaSpawner4" parent="Spawners" unique_id=1213537644 instance=ExtResource("3_o00ia")]
+position = Vector2(-1790, 4211)
+pool = Array[Resource]([ExtResource("4_o00ia")])
+capacity = 10
+
+[node name="AreaSpawner5" parent="Spawners" unique_id=1510259428 instance=ExtResource("3_o00ia")]
+position = Vector2(-1394, 2226)
+pool = Array[Resource]([ExtResource("4_o00ia")])
+capacity = 10
+
+[node name="AreaSpawner6" parent="Spawners" unique_id=1363350016 instance=ExtResource("3_o00ia")]
+position = Vector2(1024, 1933)
+pool = Array[Resource]([ExtResource("4_o00ia")])
+capacity = 10
+
+[node name="AreaSpawner7" parent="Spawners" unique_id=1248368564 instance=ExtResource("3_o00ia")]
+position = Vector2(-1672, 277)
+pool = Array[Resource]([ExtResource("4_o00ia")])
+capacity = 10
+
+[node name="AreaSpawner8" parent="Spawners" unique_id=171246643 instance=ExtResource("3_o00ia")]
+position = Vector2(-2677, -1397)
+pool = Array[Resource]([ExtResource("4_o00ia")])
+capacity = 10
+
+[node name="AreaSpawner9" parent="Spawners" unique_id=1894913551 instance=ExtResource("3_o00ia")]
+position = Vector2(-2147, -4062)
+pool = Array[Resource]([ExtResource("4_o00ia")])
+capacity = 10
+
+[node name="PointSpawner" parent="Spawners" unique_id=988531268 instance=ExtResource("8_v7dth")]
+position = Vector2(2022, 4574)
+resource = ExtResource("4_o00ia")
+
+[node name="PointSpawner2" parent="Spawners" unique_id=1549907055 instance=ExtResource("8_v7dth")]
+position = Vector2(-3487, -342)
+resource = ExtResource("4_o00ia")
+
+[node name="PointSpawner3" parent="Spawners" unique_id=2119460234 instance=ExtResource("8_v7dth")]
+position = Vector2(-667, -5236)
+resource = ExtResource("4_o00ia")
 
 [node name="Colliders" type="Node" parent="." unique_id=2067740291]
 

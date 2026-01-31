@@ -105,18 +105,17 @@ func _process(delta: float) -> void:
 func _draw():
 	draw_line(Vector2.ZERO, body.velocity.normalized() * 400, Color.RED);
 
-func _physics_process(delta: float) -> void:
-	if not Engine.is_editor_hint():
-		poll_flock();
-		
-		separation_pass();
-		alignment_pass();
-		cohesion_pass();
-		targeting_pass();
-		
-		var speed = body.velocity.length();
-		if speed < min_speed:
-			body.velocity = body.velocity.normalized() * min_speed;
-		if speed > max_speed:
-			body.velocity = body.velocity.normalized() * max_speed;
+func fly(delta):
+	poll_flock();
+	
+	separation_pass();
+	alignment_pass();
+	cohesion_pass();
+	targeting_pass();
+	
+	var speed = body.velocity.length();
+	if speed < min_speed:
+		body.velocity = body.velocity.normalized() * min_speed;
+	if speed > max_speed:
+		body.velocity = body.velocity.normalized() * max_speed;
 		

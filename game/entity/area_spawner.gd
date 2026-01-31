@@ -47,8 +47,7 @@ func trigger_spawns():
 func poll_should_trigger(body):
 	if triggered:
 		return;
-	if body.is_in_group("player"):
-		trigger_spawns();
+	trigger_spawns();
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

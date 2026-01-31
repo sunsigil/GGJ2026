@@ -3,10 +3,10 @@
 [ext_resource type="Script" uid="uid://0pngorj6qx0x" path="res://entity/area_spawner.gd" id="1_e6m2s"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e6m2s"]
-radius = 600.0
+radius = 800.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oqqrr"]
-radius = 400.0
+radius = 600.0
 
 [node name="AreaSpawner" type="Node2D" unique_id=928594478]
 script = ExtResource("1_e6m2s")

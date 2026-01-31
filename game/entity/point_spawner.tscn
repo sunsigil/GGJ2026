@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://c3byvsma7wkm4"]
+
+[ext_resource type="Script" uid="uid://ck8hwq3md73yq" path="res://entity/point_spawner.gd" id="1_flmor"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_flmor"]
+radius = 400.0
+
+[node name="PointSpawner" type="Node2D" unique_id=988531268]
+script = ExtResource("1_flmor")
+
+[node name="TriggerArea" type="Area2D" parent="." unique_id=1854385186]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea" unique_id=82787035]
+shape = SubResource("CircleShape2D_flmor")
+debug_color = Color(0.9980672, 0, 0.16215375, 0.41960785)

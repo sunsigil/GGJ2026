@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bubnuarqpaj3p"]
+
+[ext_resource type="Script" uid="uid://dnce4g5774p1a" path="res://player/swiper.gd" id="1_v8dx2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v8dx2"]
+
+[node name="Swiper" type="Node2D" unique_id=1605956003]
+script = ExtResource("1_v8dx2")
+mask = 4
+
+[node name="Hitfield" type="Area2D" parent="." unique_id=1880506012]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitfield" unique_id=2119279577]
+shape = SubResource("CircleShape2D_v8dx2")
+
+[node name="Cooldown" type="Timer" parent="." unique_id=162932439]
+wait_time = 0.1

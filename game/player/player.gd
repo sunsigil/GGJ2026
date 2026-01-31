@@ -2,8 +2,10 @@ extends CharacterBody2D
 
 var walker;
 var dasher;
-var attacker;
 var orbital;
+var swiper;
+var hitstop: Timer;
+var camera;
 
 enum PlayerState {
 	WALK,
@@ -11,12 +13,22 @@ enum PlayerState {
 };
 var state: PlayerState = PlayerState.WALK;
 
+func start_hitstop():
+	Engine.time_scale = 0;
+	hitstop.start();
+	await hitstop.timeout;
+	Engine.time_scale = 1;
+	camera.start_shake(20, 0.15);
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	walker = get_node("Walker");
 	dasher = get_node("Dasher");
-	attacker = get_node("Attacker");
 	orbital = get_node("Orbital");
+	swiper = get_node("Swiper");
+	hitstop = get_node("Hitstop");
+	camera = get_tree().get_root().get_node("Playground/Camera");
+	swiper.landed.connect(start_hitstop);
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -32,8 +44,8 @@ func _physics_process(delta):
 		PlayerState.DASH:
 			if not dasher.is_dashing():
 				state = PlayerState.WALK;
-	rotation = velocity.angle();
+	rotation = velocity.angle() + (PI / 2);
 	move_and_slide();
 	
 	if Input.is_action_just_pressed("game_attack"):
-		attacker.launch(orbital.global_position - global_position);
+		swiper.swipe(orbital.global_position - global_position);
