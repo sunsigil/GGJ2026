@@ -1,9 +1,11 @@
 extends Node2D
 
+@export_flags_2d_physics
+var mask: int;
 @export
 var bullet: Resource;
 var cooldown: Timer;
-signal landed;
+signal landed(body);
 
 func shoot(trajectory):
 	if not cooldown.is_stopped():
@@ -11,6 +13,7 @@ func shoot(trajectory):
 		
 	var instance = bullet.instantiate();
 	call_deferred("add_child", instance);
+	instance.mask = mask;
 	instance.sender = self;
 	instance.trajectory = trajectory.normalized();
 

@@ -49,7 +49,7 @@ target = NodePath("../Player")
 [node name="AreaSpawner" parent="Spawners" unique_id=928594478 instance=ExtResource("3_o00ia")]
 position = Vector2(-3, -1001)
 pool = Array[Resource]([ExtResource("4_o00ia")])
-capacity = 10
+capacity = 2
 
 [node name="AreaSpawner2" parent="Spawners" unique_id=914947445 instance=ExtResource("3_o00ia")]
 position = Vector2(2210, 43)

@@ -7,7 +7,7 @@
 script = ExtResource("1_kqer5")
 radius = 100.0
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=616722525]
+[node name="Prop" type="Sprite2D" parent="." unique_id=616722525]
 position = Vector2(0, -0.9999924)
 rotation = 3.1415927
 texture = ExtResource("2_70oyq")

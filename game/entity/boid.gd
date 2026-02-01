@@ -103,7 +103,8 @@ func _process(delta: float) -> void:
 	queue_redraw();
 
 func _draw():
-	draw_line(Vector2.ZERO, body.velocity.normalized() * 400, Color.RED);
+	if not Engine.is_editor_hint():
+		draw_line(Vector2.ZERO, body.velocity.normalized() * 400, Color.RED);
 
 func fly(delta):
 	poll_flock();

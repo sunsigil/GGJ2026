@@ -5,6 +5,7 @@
 
 [node name="Shooter" type="Node2D" unique_id=837086268]
 script = ExtResource("1_jsqih")
+mask = 4
 bullet = ExtResource("2_x37y3")
 
 [node name="Cooldown" type="Timer" parent="." unique_id=923998722]

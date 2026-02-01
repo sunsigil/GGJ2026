@@ -16,7 +16,7 @@ var cooldown: Timer;
 var hitfield: Area2D;
 var time: float;
 var hit_record: Array[Node2D] = [];
-signal landed;
+signal landed(body);
 
 func splash():
 	if not cooldown.is_stopped() or splashing:
@@ -27,6 +27,8 @@ func splash():
 	cooldown.start();
 	await cooldown.timeout;
 	cooldown.stop();
+func is_splashing():
+	return splashing;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -54,6 +56,11 @@ func _physics_process(delta: float) -> void:
 			continue;
 		if other in hit_record:
 			continue;
+
+		var spoke = other.global_position - body.global_position;
+		if spoke.length() > radius:
+			continue;
+
 		var attack = Attack.new(
 			body,
 			body.global_position, other.global_position - body.global_position,
@@ -61,7 +68,7 @@ func _physics_process(delta: float) -> void:
 		);
 		other.queue_attack(attack);
 		if hit_record.is_empty():
-			landed.emit();
+			landed.emit(other);
 		hit_record.append(other);
 		
 	if time >= duration:

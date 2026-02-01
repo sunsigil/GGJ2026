@@ -8,50 +8,108 @@ var splasher;
 var masker;
 var hitstop: Timer;
 var camera;
+var hurt_cooldown: Timer;
+var rally_timeout: Timer;
 
-func start_hitstop(stop_time, shake, shake_time):
-	Engine.time_scale = 0;
-	hitstop.wait_time = stop_time;
-	hitstop.start();
-	await hitstop.timeout;
+var attack_queue: Array[Attack];
+var alive: bool;
+var rally_targets: Array[Node2D];
+
+func start_hitstop(slow, slow_time, shake, shake_time):
+	if slow_time > 0:
+		Engine.time_scale = slow;
+		hitstop.wait_time = slow_time;
+		hitstop.start();
+		await hitstop.timeout;
 	Engine.time_scale = 1;
 	camera.start_shake(shake, shake_time);
-func start_major_hitstop():
-	start_hitstop(0.1, 20, 0.15);
-func start_minor_hitstop():
-	start_hitstop(0.05, 10, 0.005);
+func major_hitstop_callback(body):
+	start_hitstop(0, 0.1, 20, 0.15);
+func minor_hitstop_callback(body):
+	start_hitstop(0, 0.05, 10, 0.005);
+func hurtstop_callback():
+	start_hitstop(0.5, 0.25, 10, 0.25);
+
+func rally_against(targets):
+	rally_targets.append_array(targets);
+	rally_timeout.start();
+	await rally_timeout.timeout;
+	rally_targets = [];
+func rally_callback(body):
+	if body in rally_targets:
+		masker.stabilize();
+
+func die():
+	await hitstop.timeout;
+	get_tree().reload_current_scene();
+
+func queue_attack(attack: Attack):
+	if not dasher.is_dashing():
+		attack_queue.append(attack);	
+func handle_attacks():
+	if attack_queue.is_empty():
+		return;
+		
+	if not hurt_cooldown.is_stopped():
+		return;
+	
+	var rally_candidates = [];
+	while not attack_queue.is_empty():
+		var attack = attack_queue.front();
+		rally_candidates.append(attack.owner);
+		attack_queue.pop_front();
+	rally_against(rally_candidates);
+	hurtstop_callback();
+	if masker.is_mask_stable():
+		masker.destabilize();
+	else:
+		die();
+	
+	hurt_cooldown.start();
+	await hurt_cooldown.timeout;
+	hurt_cooldown.stop();
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	walker = get_node("Walker");
 	dasher = get_node("Dasher");
 	swiper = get_node("Swiper");
-	swiper.landed.connect(start_major_hitstop);
+	swiper.landed.connect(major_hitstop_callback);
+	swiper.landed.connect(rally_callback);
 	shooter = get_node("Shooter");
-	shooter.landed.connect(start_minor_hitstop);
+	shooter.landed.connect(minor_hitstop_callback);
 	splasher = get_node("Splasher");
-	splasher.landed.connect(start_major_hitstop);
+	splasher.landed.connect(major_hitstop_callback);
 	masker = get_node("Masker");
 	hitstop = get_node("Hitstop");
 	camera = get_tree().get_root().get_node("Playground/Camera");
+	hurt_cooldown = get_node("HurtCooldown");
+	rally_timeout = get_node("RallyTimeout");
 	
-	masker.unlock_mask(masker.MaskType.DASH);
-	masker.unlock_mask(masker.MaskType.SHOOT);
-	masker.unlock_mask(masker.MaskType.SPLASH);
+	masker.unlock(masker.MaskType.DASH);
+	masker.unlock(masker.MaskType.SHOOT);
+	masker.unlock(masker.MaskType.SPLASH);
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass;
 	
 func _physics_process(delta):
+	if not alive:
+		if Input.is_action_just_pressed("game_progress"):
+			alive = true;
+		return;
+	
+	handle_attacks();
+	
+	masker.swing(delta);
 	if not dasher.is_dashing():
 		walker.walk(delta);
-		
 		var mask_direction = masker.global_position - global_position;
 		if Input.is_action_just_pressed("game_attack"):
 			swiper.swipe(mask_direction);
 		if Input.is_action_just_pressed("game_cycle"):
-			masker.cycle_mask();
+			masker.cycle();
 		if Input.is_action_just_pressed("game_progress"):
 			match masker.get_mask():
 				masker.MaskType.DASH:
@@ -61,8 +119,7 @@ func _physics_process(delta):
 				masker.MaskType.SPLASH:
 					splasher.splash();
 				_:
-					swiper.swipe(mask_direction);
-					
+					swiper.swipe(mask_direction);				
 	move_and_slide();
 	
 	

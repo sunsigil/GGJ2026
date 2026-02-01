@@ -19,7 +19,7 @@ var direction: Vector2;
 var time: float;
 var hitfield: Area2D;
 var hit_record: Array[Node2D] = [];
-signal landed;
+signal landed(body);
 
 func swipe(_direction):
 	if not cooldown.is_stopped() or swiping:
@@ -31,7 +31,6 @@ func swipe(_direction):
 	cooldown.start();
 	await cooldown.timeout;
 	cooldown.stop();
-
 func is_swiping():
 	return swiping;
 
@@ -59,9 +58,13 @@ func _physics_process(delta: float) -> void:
 			continue;
 		if other in hit_record:
 			continue;
+
 		var spoke = other.global_position - body.global_position;
+		if spoke.length() > radius:
+			continue;
 		if abs(spoke.angle_to(direction)) > arc/2:
 			continue;
+
 		var attack = Attack.new(
 			body,
 			body.global_position, direction,
@@ -69,7 +72,7 @@ func _physics_process(delta: float) -> void:
 		);
 		other.queue_attack(attack);
 		if hit_record.is_empty():
-			landed.emit();
+			landed.emit(other);
 		hit_record.append(other);
 		
 	if time >= duration:

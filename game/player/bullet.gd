@@ -4,13 +4,12 @@ extends Node2D
 var damage: float;
 @export
 var speed: float;
-@export_flags_2d_physics
-var mask: int;
 var hitbox: Area2D;
 var homing_area: Area2D
 
 var sender;
 var trajectory;
+var mask: int;
 
 func _collide(body):
 	if body is CharacterBody2D:
@@ -20,7 +19,7 @@ func _collide(body):
 			damage
 		);
 		body.queue_attack(attack);
-		sender.landed.emit();
+		sender.landed.emit(body);
 	queue_free();
 
 # Called when the node enters the scene tree for the first time.

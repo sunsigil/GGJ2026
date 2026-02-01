@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://qrha35uio2p3"]
+
+[ext_resource type="Script" uid="uid://c61xdep8dpcju" path="res://entity/boid.gd" id="1_v2nhe"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_afxr3"]
+radius = 200.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ufdl5"]
+radius = 800.0
+
+[node name="Boid" type="Node2D" unique_id=1708033716]
+script = ExtResource("1_v2nhe")
+group = "enemy"
+min_speed = 300.0
+max_speed = 600.0
+protection_range = 200.0
+visual_range = 800.0
+separation = 1.0
+alignment = 0.1
+cohesion = 0.1
+targeting = 0.1
+
+[node name="ProtectionDisc" type="Area2D" parent="." unique_id=1502401010]
+collision_layer = 4
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProtectionDisc" unique_id=1294381828]
+shape = SubResource("CircleShape2D_afxr3")
+debug_color = Color(1, 0.41611603, 0.24536413, 0.41960785)
+
+[node name="VisualDisc" type="Area2D" parent="." unique_id=1030813292]
+collision_layer = 4
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisualDisc" unique_id=546553003]
+shape = SubResource("CircleShape2D_ufdl5")
+debug_color = Color(0, 0.81960785, 0.95686275, 0.105882354)

@@ -45,6 +45,7 @@ scale = Vector2(0.44000125, 0.44000125)
 texture = ExtResource("8_hg6s5")
 
 [node name="Swiper" parent="." unique_id=1605956003 instance=ExtResource("6_g6k8r")]
+extent = 425.0
 
 [node name="Shooter" parent="." unique_id=837086268 instance=ExtResource("10_8t03j")]
 
@@ -55,3 +56,8 @@ texture = ExtResource("8_hg6s5")
 [node name="Hitstop" type="Timer" parent="." unique_id=37423037]
 wait_time = 0.1
 ignore_time_scale = true
+
+[node name="HurtCooldown" type="Timer" parent="." unique_id=1518763830]
+wait_time = 0.5
+
+[node name="RallyTimeout" type="Timer" parent="." unique_id=1207004608]

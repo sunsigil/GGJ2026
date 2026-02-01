@@ -1,0 +1,42 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://cj6ssrnraiecl"]
+
+[ext_resource type="Texture2D" uid="uid://cuy2h7tbvujon" path="res://materials/hudison/walk/1.png" id="1_2htgf"]
+[ext_resource type="Texture2D" uid="uid://baownb4dcvogm" path="res://materials/hudison/walk/2.png" id="2_ve50w"]
+[ext_resource type="Texture2D" uid="uid://cx3qfns1t8te8" path="res://materials/hudison/walk/3.png" id="3_u2mho"]
+[ext_resource type="Texture2D" uid="uid://dmtsrxc3gemtk" path="res://materials/hudison/walk/4.png" id="4_ssa0y"]
+[ext_resource type="Texture2D" uid="uid://bfat06l6w8a2h" path="res://materials/hudison/walk/5.png" id="5_eu7ms"]
+[ext_resource type="Texture2D" uid="uid://c5c84udghub4k" path="res://materials/hudison/walk/6.png" id="6_wsm6e"]
+[ext_resource type="Texture2D" uid="uid://dw5qhw73feu3k" path="res://materials/hudison/walk/7.png" id="7_rrai4"]
+[ext_resource type="Texture2D" uid="uid://cucl65p5ti7i3" path="res://materials/hudison/walk/8.png" id="8_0yftc"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_2htgf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ve50w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_u2mho")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ssa0y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_eu7ms")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_wsm6e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_rrai4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_0yftc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

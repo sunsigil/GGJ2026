@@ -1,0 +1,26 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://drqdksapp7yho"]
+
+[ext_resource type="Texture2D" uid="uid://bfbruvgnhammm" path="res://materials/hudison/death/1.png" id="1_vl61c"]
+[ext_resource type="Texture2D" uid="uid://bi03x2bppggc7" path="res://materials/hudison/death/2.png" id="2_w6km3"]
+[ext_resource type="Texture2D" uid="uid://6sautxn2r6tu" path="res://materials/hudison/death/3.png" id="3_ecaah"]
+[ext_resource type="Texture2D" uid="uid://dg5wf03gwgbyg" path="res://materials/hudison/death/4.png" id="4_6d5je"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_vl61c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_w6km3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ecaah")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_6d5je")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
