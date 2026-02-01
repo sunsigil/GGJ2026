@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bssk63k0c1bxt"]
+
+[ext_resource type="SpriteFrames" uid="uid://draohpyjtyhgx" path="res://materials/rally_mark.tres" id="1_pydet"]
+
+[node name="RallyMark" type="AnimatedSprite2D" unique_id=1236400837]
+scale = Vector2(0.5, 0.5)
+sprite_frames = ExtResource("1_pydet")
+autoplay = "default"
+frame_progress = 0.51555693

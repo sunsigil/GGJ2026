@@ -53,6 +53,9 @@ func stabilize():
 			mask_danger = DangerLevel.SECURE;
 			mask.toggle_flash(false);
 
+func danger_critical():
+	return mask_danger == DangerLevel.LOST;
+
 func cycle():
 	if mask_danger == DangerLevel.LOST:
 		return;

@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+@export
+var rally_mark: Resource;
+
 var walker;
 var dasher;
 var swiper;
@@ -11,6 +14,7 @@ var camera;
 var hurt_cooldown: Timer;
 var rally_timeout: Timer;
 var relief_timeout: Timer;
+var core_sprite: Sprite2D;
 
 var attack_queue: Array[Attack];
 var alive: bool;
@@ -34,11 +38,22 @@ func hurtstop_callback():
 func rally_callback(body):
 	if body in rally_targets:
 		masker.stabilize();
+		var mark = body.get_node("RallyMark");
+		mark.queue_free();
+		rally_targets.erase(body);
 func rally_against(targets):
-	rally_targets.append_array(targets);
+	for target in targets:
+		if is_instance_valid(target) and not target in rally_targets:
+			var mark = rally_mark.instantiate();
+			target.add_child(mark);
+			rally_targets.append(target);
 	rally_timeout.start();
 	relief_timeout.start();
 	await rally_timeout.timeout;
+	for target in rally_targets:
+		if is_instance_valid(target):
+			var mark = target.get_node("RallyMark");
+			mark.queue_free();
 	rally_targets = [];
 	await relief_timeout.timeout;
 	masker.stabilize();
@@ -98,10 +113,13 @@ func _ready() -> void:
 	hurt_cooldown = get_node("HurtCooldown");
 	rally_timeout = get_node("RallyTimeout");
 	relief_timeout = get_node("ReliefTimeout");
-	
+	core_sprite = get_node("Body");
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	core_sprite.material.set_shader_parameter("flash_period",
+		0.25 if masker.danger_critical() else 0.0
+	);
 	pass;
 	
 func _physics_process(delta):

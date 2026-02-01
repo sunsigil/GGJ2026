@@ -1,6 +1,7 @@
 extends Node2D
 
 var body: CharacterBody2D;
+var sprite: AnimatedSprite2D;
 
 @export 
 var damage: float = 25;
@@ -24,15 +25,23 @@ func splash():
 	splashing = true;
 	time = 0;
 	hit_record = [];
+	sprite.scale = Vector2(extent/500, extent/500);
+	sprite.set_speed_scale(1.0/duration);
+	sprite.set_frame_and_progress(0, 0);
+	sprite.play();
+
 	cooldown.start();
 	await cooldown.timeout;
 	cooldown.stop();
+
 func is_splashing():
 	return splashing;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	body = get_parent();
+	sprite = get_node("AnimatedSprite2D");
+	sprite.visible = false;
 	hitfield = get_node("Hitfield");	
 	hitfield.get_node("CollisionShape2D").shape.radius = extent;
 	hitfield.collision_mask = mask;
@@ -40,6 +49,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	sprite.visible = splashing;
 	queue_redraw();
 
 func _physics_process(delta: float) -> void:

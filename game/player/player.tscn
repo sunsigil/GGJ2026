@@ -2,10 +2,12 @@
 
 [ext_resource type="Script" uid="uid://crgabanmakce3" path="res://player/walker.gd" id="1_g1dw6"]
 [ext_resource type="SpriteFrames" uid="uid://bs0gwltvftdf6" path="res://materials/player/flames.tres" id="2_boad6"]
+[ext_resource type="PackedScene" uid="uid://bssk63k0c1bxt" path="res://entity/rally_mark.tscn" id="2_ebec5"]
 [ext_resource type="PackedScene" uid="uid://c3byhmuica0t7" path="res://player/dasher.tscn" id="3_8t03j"]
 [ext_resource type="Script" uid="uid://c4yxg3e8kh1i6" path="res://player/player.gd" id="3_qjkh3"]
 [ext_resource type="PackedScene" uid="uid://bubnuarqpaj3p" path="res://player/swiper.tscn" id="6_g6k8r"]
 [ext_resource type="SpriteFrames" uid="uid://do6ck1au7ow26" path="res://materials/player/legs.tres" id="6_rgyib"]
+[ext_resource type="Shader" uid="uid://bjd7r26a0st7d" path="res://materials/whiteflash.gdshader" id="7_2ieo8"]
 [ext_resource type="Texture2D" uid="uid://bv3qmtssu3730" path="res://materials/player/body.png" id="8_hg6s5"]
 [ext_resource type="PackedScene" uid="uid://d1veis2g615fh" path="res://player/shooter.tscn" id="10_8t03j"]
 [ext_resource type="PackedScene" uid="uid://b68aofthx277r" path="res://player/splasher.tscn" id="11_2ieo8"]
@@ -14,10 +16,16 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_yw30f"]
 radius = 64.00781
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ebec5"]
+shader = ExtResource("7_2ieo8")
+shader_parameter/flash_colour = Vector4(1, 0, 0.5, 1)
+shader_parameter/flash_period = 0.0
+
 [node name="Player" type="CharacterBody2D" unique_id=61600611 groups=["player"]]
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("3_qjkh3")
+rally_mark = ExtResource("2_ebec5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1636976208]
 shape = SubResource("CircleShape2D_yw30f")
@@ -26,6 +34,9 @@ shape = SubResource("CircleShape2D_yw30f")
 script = ExtResource("1_g1dw6")
 
 [node name="Dasher" parent="." unique_id=559668156 instance=ExtResource("3_8t03j")]
+
+[node name="Splasher" parent="." unique_id=1390973351 instance=ExtResource("11_2ieo8")]
+duration = 0.35
 
 [node name="Legs" type="AnimatedSprite2D" parent="." unique_id=1857930987]
 position = Vector2(10, -9)
@@ -40,6 +51,7 @@ autoplay = "default"
 frame_progress = 0.52136046
 
 [node name="Body" type="Sprite2D" parent="." unique_id=1182604590]
+material = SubResource("ShaderMaterial_ebec5")
 position = Vector2(2, 4)
 scale = Vector2(0.44000125, 0.44000125)
 texture = ExtResource("8_hg6s5")
@@ -49,8 +61,6 @@ extent = 350.0
 arc = 3.14
 
 [node name="Shooter" parent="." unique_id=837086268 instance=ExtResource("10_8t03j")]
-
-[node name="Splasher" parent="." unique_id=1390973351 instance=ExtResource("11_2ieo8")]
 
 [node name="Masker" parent="." unique_id=835421663 instance=ExtResource("12_ebec5")]
 
