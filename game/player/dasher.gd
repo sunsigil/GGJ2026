@@ -11,14 +11,20 @@ var end: Vector2 = Vector2.ZERO;
 
 var dashing: bool;
 var time: float;
+var cooldown: Timer;
 
 func dash(direction):
+	if dashing or not cooldown.is_stopped():
+		return;
 	start = position;
 	end = position + direction;
-	
 	dashing = true;
 	body.velocity = (end-start).normalized() * range/duration;
 	time = 0;
+
+	cooldown.start();
+	await cooldown.timeout;
+	cooldown.stop();
 	
 func is_dashing():
 	return dashing;
@@ -26,15 +32,13 @@ func is_dashing():
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	body = get_parent();
-	pass # Replace with function body.
+	cooldown = get_node("Cooldown");
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 	
 func _physics_process(delta: float) -> void:
-	if body == null:
-		return;
 	if dashing:
 		time += delta;
 		if time >= duration:

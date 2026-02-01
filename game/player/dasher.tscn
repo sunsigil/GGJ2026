@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://c3byhmuica0t7"]
+
+[ext_resource type="Script" uid="uid://bfrxuiggbibdx" path="res://player/dasher.gd" id="1_glt2i"]
+
+[node name="Dasher" type="Node2D" unique_id=559668156]
+script = ExtResource("1_glt2i")
+
+[node name="Cooldown" type="Timer" parent="." unique_id=1693444295]
+wait_time = 1.5

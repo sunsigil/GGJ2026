@@ -8,12 +8,15 @@ signal landed;
 func shoot(trajectory):
 	if not cooldown.is_stopped():
 		return;
+		
 	var instance = bullet.instantiate();
 	call_deferred("add_child", instance);
 	instance.sender = self;
 	instance.trajectory = trajectory.normalized();
+
 	cooldown.start();
-	cooldown.timeout.connect(cooldown.stop);
+	await cooldown.timeout;
+	cooldown.stop();
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

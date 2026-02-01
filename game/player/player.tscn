@@ -2,15 +2,14 @@
 
 [ext_resource type="Script" uid="uid://crgabanmakce3" path="res://player/walker.gd" id="1_g1dw6"]
 [ext_resource type="SpriteFrames" uid="uid://bs0gwltvftdf6" path="res://materials/player/flames.tres" id="2_boad6"]
-[ext_resource type="Texture2D" uid="uid://dixbv6fkide1o" path="res://icon.svg" id="2_yw30f"]
+[ext_resource type="PackedScene" uid="uid://c3byhmuica0t7" path="res://player/dasher.tscn" id="3_8t03j"]
 [ext_resource type="Script" uid="uid://c4yxg3e8kh1i6" path="res://player/player.gd" id="3_qjkh3"]
-[ext_resource type="PackedScene" uid="uid://ufp8m6ordesh" path="res://player/orbital.tscn" id="4_yw30f"]
-[ext_resource type="Script" uid="uid://bfrxuiggbibdx" path="res://player/dasher.gd" id="5_qjkh3"]
 [ext_resource type="PackedScene" uid="uid://bubnuarqpaj3p" path="res://player/swiper.tscn" id="6_g6k8r"]
 [ext_resource type="SpriteFrames" uid="uid://do6ck1au7ow26" path="res://materials/player/legs.tres" id="6_rgyib"]
 [ext_resource type="Texture2D" uid="uid://bv3qmtssu3730" path="res://materials/player/body.png" id="8_hg6s5"]
 [ext_resource type="PackedScene" uid="uid://d1veis2g615fh" path="res://player/shooter.tscn" id="10_8t03j"]
 [ext_resource type="PackedScene" uid="uid://b68aofthx277r" path="res://player/splasher.tscn" id="11_2ieo8"]
+[ext_resource type="PackedScene" uid="uid://b031oinudyr8o" path="res://player/masker.tscn" id="12_ebec5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yw30f"]
 radius = 64.00781
@@ -26,21 +25,13 @@ shape = SubResource("CircleShape2D_yw30f")
 [node name="Walker" type="Node2D" parent="." unique_id=2031330480]
 script = ExtResource("1_g1dw6")
 
-[node name="Dasher" type="Node2D" parent="." unique_id=1930888167]
-script = ExtResource("5_qjkh3")
+[node name="Dasher" parent="." unique_id=559668156 instance=ExtResource("3_8t03j")]
 
 [node name="Legs" type="AnimatedSprite2D" parent="." unique_id=1857930987]
 position = Vector2(10, -9)
 sprite_frames = ExtResource("6_rgyib")
 autoplay = "default"
 frame_progress = 0.9652379
-
-[node name="Orbital" parent="." unique_id=1642983030 instance=ExtResource("4_yw30f")]
-radius = 150.0
-
-[node name="Sprite2D" type="Sprite2D" parent="Orbital" unique_id=1672288913]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_yw30f")
 
 [node name="Flames" type="AnimatedSprite2D" parent="." unique_id=1021406859]
 position = Vector2(11, -28)
@@ -58,6 +49,8 @@ texture = ExtResource("8_hg6s5")
 [node name="Shooter" parent="." unique_id=837086268 instance=ExtResource("10_8t03j")]
 
 [node name="Splasher" parent="." unique_id=1390973351 instance=ExtResource("11_2ieo8")]
+
+[node name="Masker" parent="." unique_id=835421663 instance=ExtResource("12_ebec5")]
 
 [node name="Hitstop" type="Timer" parent="." unique_id=37423037]
 wait_time = 0.1

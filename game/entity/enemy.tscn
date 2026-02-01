@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://dtgywicxqs50"]
 
 [ext_resource type="Script" uid="uid://60w6hg83fjab" path="res://entity/enemy.gd" id="1_2mvqj"]
+[ext_resource type="SpriteFrames" uid="uid://cfw6bec5lik48" path="res://materials/mob/walk.tres" id="2_iemci"]
 [ext_resource type="Script" uid="uid://c61xdep8dpcju" path="res://entity/boid.gd" id="2_p1h7c"]
-[ext_resource type="Texture2D" uid="uid://dixbv6fkide1o" path="res://icon.svg" id="2_ufdl5"]
 [ext_resource type="Script" uid="uid://b6ao3g32l7aqs" path="res://entity/lifeforce.gd" id="4_iemci"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_iemci"]
@@ -20,17 +20,22 @@ radius = 800.0
 collision_layer = 4
 script = ExtResource("1_2mvqj")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1715057357]
+position = Vector2(11.999998, 1.0000002)
+rotation = -0.6095498
+scale = Vector2(0.75, 0.75)
+sprite_frames = ExtResource("2_iemci")
+autoplay = "default"
+frame_progress = 0.6557546
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2120428734]
 shape = SubResource("CircleShape2D_iemci")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1694978609]
-modulate = Color(1, 0, 0, 1)
-texture = ExtResource("2_ufdl5")
 
 [node name="Boid" type="Node2D" parent="." unique_id=1321923868]
 script = ExtResource("2_p1h7c")
 group = "enemy"
-min_speed = 400.0
+min_speed = 300.0
+max_speed = 600.0
 protection_range = 200.0
 visual_range = 800.0
 separation = 1.0
