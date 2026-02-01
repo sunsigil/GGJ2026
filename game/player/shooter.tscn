@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://d1veis2g615fh"]
+
+[ext_resource type="Script" uid="uid://ddb33jhhcs027" path="res://player/shooter.gd" id="1_jsqih"]
+[ext_resource type="PackedScene" uid="uid://bfj0rw0lrh47b" path="res://player/bullet.tscn" id="2_x37y3"]
+
+[node name="Shooter" type="Node2D" unique_id=837086268]
+script = ExtResource("1_jsqih")
+bullet = ExtResource("2_x37y3")
+
+[node name="Cooldown" type="Timer" parent="." unique_id=923998722]
+wait_time = 0.15

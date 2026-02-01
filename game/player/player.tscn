@@ -1,11 +1,15 @@
 [gd_scene format=3 uid="uid://csyjusrfcxdi8"]
 
 [ext_resource type="Script" uid="uid://crgabanmakce3" path="res://player/walker.gd" id="1_g1dw6"]
+[ext_resource type="SpriteFrames" uid="uid://bs0gwltvftdf6" path="res://materials/player/flames.tres" id="2_boad6"]
 [ext_resource type="Texture2D" uid="uid://dixbv6fkide1o" path="res://icon.svg" id="2_yw30f"]
 [ext_resource type="Script" uid="uid://c4yxg3e8kh1i6" path="res://player/player.gd" id="3_qjkh3"]
 [ext_resource type="PackedScene" uid="uid://ufp8m6ordesh" path="res://player/orbital.tscn" id="4_yw30f"]
 [ext_resource type="Script" uid="uid://bfrxuiggbibdx" path="res://player/dasher.gd" id="5_qjkh3"]
 [ext_resource type="PackedScene" uid="uid://bubnuarqpaj3p" path="res://player/swiper.tscn" id="6_g6k8r"]
+[ext_resource type="SpriteFrames" uid="uid://do6ck1au7ow26" path="res://materials/player/legs.tres" id="6_rgyib"]
+[ext_resource type="Texture2D" uid="uid://bv3qmtssu3730" path="res://materials/player/body.png" id="8_hg6s5"]
+[ext_resource type="PackedScene" uid="uid://d1veis2g615fh" path="res://player/shooter.tscn" id="10_8t03j"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yw30f"]
 radius = 64.00781
@@ -18,14 +22,17 @@ script = ExtResource("3_qjkh3")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1636976208]
 shape = SubResource("CircleShape2D_yw30f")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=206495934]
-texture = ExtResource("2_yw30f")
-
 [node name="Walker" type="Node2D" parent="." unique_id=2031330480]
 script = ExtResource("1_g1dw6")
 
 [node name="Dasher" type="Node2D" parent="." unique_id=1930888167]
 script = ExtResource("5_qjkh3")
+
+[node name="Legs" type="AnimatedSprite2D" parent="." unique_id=1857930987]
+position = Vector2(10, -9)
+sprite_frames = ExtResource("6_rgyib")
+autoplay = "default"
+frame_progress = 0.9652379
 
 [node name="Orbital" parent="." unique_id=1642983030 instance=ExtResource("4_yw30f")]
 radius = 150.0
@@ -34,7 +41,20 @@ radius = 150.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_yw30f")
 
+[node name="Flames" type="AnimatedSprite2D" parent="." unique_id=1021406859]
+position = Vector2(11, -28)
+sprite_frames = ExtResource("2_boad6")
+autoplay = "default"
+frame_progress = 0.52136046
+
+[node name="Body" type="Sprite2D" parent="." unique_id=1182604590]
+position = Vector2(2, 4)
+scale = Vector2(0.44000125, 0.44000125)
+texture = ExtResource("8_hg6s5")
+
 [node name="Swiper" parent="." unique_id=1605956003 instance=ExtResource("6_g6k8r")]
+
+[node name="Shooter" parent="." unique_id=837086268 instance=ExtResource("10_8t03j")]
 
 [node name="Hitstop" type="Timer" parent="." unique_id=37423037]
 wait_time = 0.1

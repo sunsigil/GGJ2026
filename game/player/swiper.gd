@@ -1,7 +1,6 @@
 extends Node2D
 
 var body: CharacterBody2D;
-var hitfield: Area2D;
 
 @export_flags_2d_physics
 var mask: int;
@@ -18,6 +17,7 @@ var swiping: bool;
 var cooldown: Timer;
 var direction: Vector2;
 var time: float;
+var hitfield: Area2D;
 var hit_record: Array[Node2D] = [];
 signal landed;
 
@@ -65,7 +65,6 @@ func _physics_process(delta: float) -> void:
 		var attack = Attack.new(
 			body,
 			body.global_position, direction,
-			range,
 			damage
 		);
 		other.queue_attack(attack);
@@ -86,6 +85,6 @@ func _draw():
 		Vector2.ZERO, radius,
 		attack_angle - arc/2,
 		attack_angle + arc/2,
-		64, Color.RED
+		64, Color.WHITE
 	);
 	
