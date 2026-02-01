@@ -44,13 +44,11 @@ func destabilize():
 		mask_endangered.emit();
 	if mask_danger == 2:
 		mask_lost.emit();
-		prop.visible = false;
 
 func stabilize():
 	mask_danger = clamp(mask_danger-1, 0, 2);
 	if mask_danger == 0:
 		mask_restored.emit();
-		prop.visible = true;
 
 func get_mask():
 	if mask_collection.is_empty() or mask_danger == 2:

@@ -39,6 +39,10 @@ func rally_callback(body):
 	if body in rally_targets:
 		masker.stabilize();
 
+func endanger_mask():
+	masker.visible = false;
+func restore_mask():
+	masker.visible = true;
 func die():
 	await hitstop.timeout;
 	get_tree().reload_current_scene();
@@ -58,12 +62,9 @@ func handle_attacks():
 		var attack = attack_queue.front();
 		rally_candidates.append(attack.owner);
 		attack_queue.pop_front();
-	rally_against(rally_candidates);
 	hurtstop_callback();
-	if masker.is_mask_stable():
-		masker.destabilize();
-	else:
-		die();
+	masker.destabilize();
+	rally_against(rally_candidates);
 	
 	hurt_cooldown.start();
 	await hurt_cooldown.timeout;
@@ -73,22 +74,31 @@ func handle_attacks():
 func _ready() -> void:
 	walker = get_node("Walker");
 	dasher = get_node("Dasher");
+
 	swiper = get_node("Swiper");
 	swiper.landed.connect(major_hitstop_callback);
 	swiper.landed.connect(rally_callback);
+
 	shooter = get_node("Shooter");
 	shooter.landed.connect(minor_hitstop_callback);
+
 	splasher = get_node("Splasher");
 	splasher.landed.connect(major_hitstop_callback);
+
 	masker = get_node("Masker");
-	hitstop = get_node("Hitstop");
-	camera = get_tree().get_root().get_node("Playground/Camera");
-	hurt_cooldown = get_node("HurtCooldown");
-	rally_timeout = get_node("RallyTimeout");
-	
+	masker.mask_endangered.connect(endanger_mask);
+	masker.mask_restored.connect(restore_mask);
+	masker.mask_lost.connect(die);
 	masker.unlock(masker.MaskType.DASH);
 	masker.unlock(masker.MaskType.SHOOT);
 	masker.unlock(masker.MaskType.SPLASH);
+
+	camera = get_tree().get_root().get_node("Playground/Camera");
+	hitstop = get_node("Hitstop");
+	hurt_cooldown = get_node("HurtCooldown");
+	rally_timeout = get_node("RallyTimeout");
+	
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
