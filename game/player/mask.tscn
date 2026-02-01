@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bygc8hxog1fcf"]
+
+[ext_resource type="Shader" uid="uid://bjd7r26a0st7d" path="res://materials/whiteflash.gdshader" id="1_dtchp"]
+[ext_resource type="Script" uid="uid://c07bgwrv60psj" path="res://player/mask.gd" id="1_kcowh"]
+[ext_resource type="SpriteFrames" uid="uid://b0pa63lyaor1c" path="res://materials/masks/dash/dash_mask.tres" id="2_0qxr1"]
+[ext_resource type="SpriteFrames" uid="uid://cyb8ybqck8lpr" path="res://materials/masks/none/no_mask.tres" id="3_r04cd"]
+[ext_resource type="SpriteFrames" uid="uid://bc38lt85ul52q" path="res://materials/masks/plain/plain_mask.tres" id="4_7sm4c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7sm4c"]
+shader = ExtResource("1_dtchp")
+shader_parameter/flash_colour = Vector4(1, 1, 1, 1)
+shader_parameter/flash_period = 0.0
+
+[node name="Mask" type="AnimatedSprite2D" unique_id=1147204554]
+material = SubResource("ShaderMaterial_7sm4c")
+sprite_frames = ExtResource("3_r04cd")
+script = ExtResource("1_kcowh")
+none_mask = ExtResource("3_r04cd")
+plain_mask = ExtResource("4_7sm4c")
+dash_mask = ExtResource("2_0qxr1")
+shoot_mask = ExtResource("2_0qxr1")
+splash_mask = ExtResource("2_0qxr1")

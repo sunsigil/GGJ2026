@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://b6ajw2c8uoxr8"]
+
+[ext_resource type="Shader" uid="uid://bjd7r26a0st7d" path="res://materials/whiteflash.gdshader" id="1_oibov"]
+
+[resource]
+shader = ExtResource("1_oibov")
+shader_parameter/flash_colour = Vector4(1, 1, 1, 1)
+shader_parameter/flash_period = 0.0

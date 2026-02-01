@@ -1,13 +1,12 @@
 [gd_scene format=3 uid="uid://b031oinudyr8o"]
 
 [ext_resource type="Script" uid="uid://c1dl0fkp3s5q7" path="res://player/masker.gd" id="1_kqer5"]
-[ext_resource type="Texture2D" uid="uid://c5o7mw0mbn5k2" path="res://materials/masks/player.png" id="2_70oyq"]
+[ext_resource type="PackedScene" uid="uid://bygc8hxog1fcf" path="res://player/mask.tscn" id="2_70oyq"]
 
 [node name="Masker" type="Node2D" unique_id=835421663]
 script = ExtResource("1_kqer5")
 radius = 100.0
 
-[node name="Prop" type="Sprite2D" parent="." unique_id=616722525]
-position = Vector2(0, -0.9999924)
+[node name="Mask" parent="." unique_id=1147204554 instance=ExtResource("2_70oyq")]
+position = Vector2(-1, 1)
 rotation = 3.1415927
-texture = ExtResource("2_70oyq")

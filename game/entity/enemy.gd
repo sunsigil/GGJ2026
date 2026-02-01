@@ -22,16 +22,15 @@ var knockback_duration: float = 0.1;
 var knockback_time: float = 0;
 var should_die: bool;
 		
-func start_hit_react(direction):
-	knockback = direction * 4000;
+func start_knockback(direction, strength):
+	knockback = direction * strength;
 	knockback_time = 0;
-func tick_hit_react(delta):
+func tick_knockback(delta):
 	var t = knockback_time / knockback_duration;
 	velocity = knockback * (1 - t*t);
 	knockback_time += delta;
-func is_hit_reacting():
+func is_in_knockback():
 	return knockback_time < knockback_duration;
-
 
 func accept_death():
 	should_die = true;
@@ -42,7 +41,7 @@ func handle_attacks():
 	while not attack_queue.is_empty():
 		var _attack = attack_queue.front();
 		lifeforce.queue_damage(_attack.damage);
-		start_hit_react(_attack.direction);
+		start_knockback(_attack.direction, 4000);
 		attack_queue.pop_front();
 
 func target_vector():
@@ -108,17 +107,17 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	boid.target = PlayerData.player;
 	handle_attacks();
-	if should_die and not is_hit_reacting():
+	if should_die and not is_in_knockback():
 		queue_free();
 
 func _physics_process(delta: float) -> void:
-	if is_hit_reacting():
-		tick_hit_react(delta);
+	if is_in_knockback():
+		tick_knockback(delta);
 	else:
 		attack();
 		if is_attacking():
 			velocity = Vector2.ZERO;
 		else:
 			boid.fly(delta);
-	global_rotation = velocity.angle() - PI/2;
+	global_rotation = (PlayerData.player.global_position - global_position).angle() - PI/2;
 	move_and_slide();

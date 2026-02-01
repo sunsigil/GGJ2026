@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dtgywicxqs50"]
 
 [ext_resource type="Script" uid="uid://60w6hg83fjab" path="res://entity/enemy.gd" id="1_2mvqj"]
-[ext_resource type="SpriteFrames" uid="uid://cfw6bec5lik48" path="res://materials/mob/walk.tres" id="2_iemci"]
+[ext_resource type="SpriteFrames" uid="uid://cfw6bec5lik48" path="res://materials/mob/mob.tres" id="2_iemci"]
 [ext_resource type="PackedScene" uid="uid://qrha35uio2p3" path="res://entity/boid.tscn" id="3_isc6y"]
 [ext_resource type="Script" uid="uid://b6ao3g32l7aqs" path="res://entity/lifeforce.gd" id="4_iemci"]
 [ext_resource type="PackedScene" uid="uid://bubnuarqpaj3p" path="res://player/swiper.tscn" id="5_7vc4j"]
@@ -49,7 +49,7 @@ position = Vector2(11.999998, 1.0000002)
 rotation = -0.6095498
 scale = Vector2(0.75000006, 0.75000006)
 sprite_frames = ExtResource("2_iemci")
-autoplay = "default"
-frame_progress = 0.5878337
+animation = &"walk"
+autoplay = "walk"
 
 [node name="AttackCooldown" type="Timer" parent="." unique_id=127148942]

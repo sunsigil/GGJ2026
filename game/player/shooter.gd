@@ -12,7 +12,8 @@ func shoot(trajectory):
 		return;
 		
 	var instance = bullet.instantiate();
-	call_deferred("add_child", instance);
+	get_tree().get_root().add_child(instance);
+	instance.global_position = global_position;
 	instance.mask = mask;
 	instance.sender = self;
 	instance.trajectory = trajectory.normalized();

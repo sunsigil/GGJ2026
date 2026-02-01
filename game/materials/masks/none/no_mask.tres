@@ -1,0 +1,62 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://cyb8ybqck8lpr"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cjfhc"]
+load_path = "res://.godot/imported/1.png-140e61a90b76c795e8c1395624ffeca6.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lbxvn"]
+load_path = "res://.godot/imported/2.png-8e3ebfe14228143736bf4d7ff2a39961.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_y8bv4"]
+load_path = "res://.godot/imported/3.png-cb0c2e8d6208eab8e31e0765aa8552bc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kk8il"]
+load_path = "res://.godot/imported/4.png-f2946b53516fd876034685063f735028.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0bmoo"]
+load_path = "res://.godot/imported/5.png-f65b521fcb889980b174a2b94d8b0324.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2qjq1"]
+load_path = "res://.godot/imported/6.png-aaf3022d8af17d9eb05484e3ec4c243c.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8idoh"]
+load_path = "res://.godot/imported/7.png-ccc2280d686a91814459f5e94c2cb709.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lcsky"]
+load_path = "res://.godot/imported/8.png-48b2ffdf5fb1c337b6c35fbc99078f17.ctex"
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_cjfhc")
+}, {
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_lbxvn")
+}, {
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_y8bv4")
+}, {
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_kk8il")
+}, {
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_0bmoo")
+}, {
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_2qjq1")
+}, {
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_8idoh")
+}, {
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_lcsky")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": false,
+"name": &"dissolve",
+"speed": 5.0
+}]

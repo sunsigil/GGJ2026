@@ -1,61 +1,63 @@
 extends Node2D
 
 var body: Node2D;
+var mask: AnimatedSprite2D;
 
-@export
-var masks: Array[Resource];
 @export
 var radius: float = 150;
 @export
 var delay: float = 0.1;
-var prop: Node2D;
 
 enum MaskType {
-	NONE,
+	PLAIN,
 	DASH,
 	SHOOT,
 	SPLASH,
-	COUNT
+	NONE,
 };
-var mask_collection = [];
+enum DangerLevel {
+	SECURE,
+	INSECURE,
+	LOST
+};
+var mask_collection: Array[MaskType] = [MaskType.PLAIN];
 var mask_idx: int;
-var mask_danger: int;
+var mask_danger: DangerLevel = DangerLevel.SECURE;
 
-signal mask_endangered;
-signal mask_restored;
-signal mask_lost;
+func unlock(_mask: MaskType):
+	if not _mask in mask_collection:
+		mask_collection.append(_mask);
 
-func unlock(mask: MaskType):
-	if not mask in mask_collection:
-		mask_collection.append(mask);
-
-func is_unlocked(mask: MaskType):
-	return mask in mask_collection;
-
-func cycle():
-	if mask_collection.is_empty():
-		mask_idx = 0;
-	else:
-		mask_idx = (mask_idx+1) % len(mask_collection);
-
-func destabilize():
-	mask_danger = clamp(mask_danger+1, 0, 2);
-	if mask_danger == 1:
-		mask_endangered.emit();
-	if mask_danger == 2:
-		mask_lost.emit();
-
-func stabilize():
-	mask_danger = clamp(mask_danger-1, 0, 2);
-	if mask_danger == 0:
-		mask_restored.emit();
+func is_unlocked(_mask: MaskType):
+	return _mask in mask_collection;
 
 func get_mask():
-	if mask_collection.is_empty() or mask_danger == 2:
+	if mask_danger == DangerLevel.LOST:
 		return MaskType.NONE;
 	return mask_collection[mask_idx % len(mask_collection)];
-func is_mask_stable():
-	return mask_danger == 0;
+
+func destabilize():
+	match mask_danger:
+		DangerLevel.SECURE:
+			mask_danger = DangerLevel.INSECURE;
+			mask.toggle_flash(true);
+		DangerLevel.INSECURE:
+			mask_danger = DangerLevel.LOST;
+			mask.change(get_mask());
+func stabilize():
+	match mask_danger:
+		DangerLevel.LOST:
+			mask_danger = DangerLevel.INSECURE;
+			mask.change(get_mask());
+		DangerLevel.INSECURE:
+			mask_danger = DangerLevel.SECURE;
+			mask.toggle_flash(false);
+
+func cycle():
+	if mask_danger == DangerLevel.LOST:
+		return;
+	mask_idx = (mask_idx+1) % len(mask_collection);
+	mask.change(get_mask());
 
 func swing(delta):
 	var arm = Vector2.UP.rotated(global_rotation) * radius;
@@ -68,6 +70,6 @@ func swing(delta):
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	body = get_parent();
-	prop = get_node("Prop");
+	mask = get_node("Mask");
 	swing(0);
 	

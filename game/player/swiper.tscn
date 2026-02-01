@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bubnuarqpaj3p"]
 
 [ext_resource type="Script" uid="uid://dnce4g5774p1a" path="res://player/swiper.gd" id="1_v8dx2"]
+[ext_resource type="SpriteFrames" uid="uid://cmo7hesta34um" path="res://materials/slash/slash_2.tres" id="2_58we1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v8dx2"]
 
@@ -16,3 +17,7 @@ shape = SubResource("CircleShape2D_v8dx2")
 
 [node name="Cooldown" type="Timer" parent="." unique_id=162932439]
 wait_time = 0.1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=18822239]
+visible = false
+sprite_frames = ExtResource("2_58we1")

@@ -10,6 +10,7 @@ var hitstop: Timer;
 var camera;
 var hurt_cooldown: Timer;
 var rally_timeout: Timer;
+var relief_timeout: Timer;
 
 var attack_queue: Array[Attack];
 var alive: bool;
@@ -30,19 +31,18 @@ func minor_hitstop_callback(body):
 func hurtstop_callback():
 	start_hitstop(0.5, 0.25, 10, 0.25);
 
-func rally_against(targets):
-	rally_targets.append_array(targets);
-	rally_timeout.start();
-	await rally_timeout.timeout;
-	rally_targets = [];
 func rally_callback(body):
 	if body in rally_targets:
 		masker.stabilize();
+func rally_against(targets):
+	rally_targets.append_array(targets);
+	rally_timeout.start();
+	relief_timeout.start();
+	await rally_timeout.timeout;
+	rally_targets = [];
+	await relief_timeout.timeout;
+	masker.stabilize();
 
-func endanger_mask():
-	masker.visible = false;
-func restore_mask():
-	masker.visible = true;
 func die():
 	await hitstop.timeout;
 	get_tree().reload_current_scene();
@@ -63,8 +63,11 @@ func handle_attacks():
 		rally_candidates.append(attack.owner);
 		attack_queue.pop_front();
 	hurtstop_callback();
-	masker.destabilize();
-	rally_against(rally_candidates);
+	if masker.get_mask() == masker.MaskType.NONE:
+		die();
+	else:
+		masker.destabilize();
+		rally_against(rally_candidates);
 	
 	hurt_cooldown.start();
 	await hurt_cooldown.timeout;
@@ -86,9 +89,6 @@ func _ready() -> void:
 	splasher.landed.connect(major_hitstop_callback);
 
 	masker = get_node("Masker");
-	masker.mask_endangered.connect(endanger_mask);
-	masker.mask_restored.connect(restore_mask);
-	masker.mask_lost.connect(die);
 	masker.unlock(masker.MaskType.DASH);
 	masker.unlock(masker.MaskType.SHOOT);
 	masker.unlock(masker.MaskType.SPLASH);
@@ -97,7 +97,7 @@ func _ready() -> void:
 	hitstop = get_node("Hitstop");
 	hurt_cooldown = get_node("HurtCooldown");
 	rally_timeout = get_node("RallyTimeout");
-	
+	relief_timeout = get_node("ReliefTimeout");
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -123,7 +123,7 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("game_progress"):
 			match masker.get_mask():
 				masker.MaskType.DASH:
-					dasher.dash(mask_direction);
+					dasher.dash(velocity);
 				masker.MaskType.SHOOT:
 					shooter.shoot(mask_direction);
 				masker.MaskType.SPLASH:
