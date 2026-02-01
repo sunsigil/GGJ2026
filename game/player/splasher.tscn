@@ -1,10 +1,18 @@
 [gd_scene format=3 uid="uid://b68aofthx277r"]
 
+[ext_resource type="Script" uid="uid://criehq45yhuib" path="res://player/splasher.gd" id="1_regoe"]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_nrymi"]
 
 [node name="Splasher" type="Node2D" unique_id=1390973351]
+script = ExtResource("1_regoe")
+extent = 400.0
+mask = 4
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1250634132]
+[node name="Hitfield" type="Area2D" parent="." unique_id=1250634132]
+collision_layer = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1898178465]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitfield" unique_id=1898178465]
 shape = SubResource("CircleShape2D_nrymi")
+
+[node name="Cooldown" type="Timer" parent="." unique_id=1904584883]

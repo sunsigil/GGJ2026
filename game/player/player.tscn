@@ -10,6 +10,7 @@
 [ext_resource type="SpriteFrames" uid="uid://do6ck1au7ow26" path="res://materials/player/legs.tres" id="6_rgyib"]
 [ext_resource type="Texture2D" uid="uid://bv3qmtssu3730" path="res://materials/player/body.png" id="8_hg6s5"]
 [ext_resource type="PackedScene" uid="uid://d1veis2g615fh" path="res://player/shooter.tscn" id="10_8t03j"]
+[ext_resource type="PackedScene" uid="uid://b68aofthx277r" path="res://player/splasher.tscn" id="11_2ieo8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yw30f"]
 radius = 64.00781
@@ -55,6 +56,8 @@ texture = ExtResource("8_hg6s5")
 [node name="Swiper" parent="." unique_id=1605956003 instance=ExtResource("6_g6k8r")]
 
 [node name="Shooter" parent="." unique_id=837086268 instance=ExtResource("10_8t03j")]
+
+[node name="Splasher" parent="." unique_id=1390973351 instance=ExtResource("11_2ieo8")]
 
 [node name="Hitstop" type="Timer" parent="." unique_id=37423037]
 wait_time = 0.1

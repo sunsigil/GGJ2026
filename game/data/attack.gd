@@ -8,5 +8,5 @@ var damage: float;
 func _init(_owner, _start, _direction, _damage):
 	owner = _owner;
 	start = _start;
-	direction = _direction;
+	direction = _direction.normalized();
 	damage = _damage;

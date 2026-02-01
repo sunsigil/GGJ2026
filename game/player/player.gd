@@ -5,6 +5,7 @@ var dasher;
 var orbital;
 var swiper;
 var shooter;
+var splasher;
 var hitstop: Timer;
 var camera;
 
@@ -35,6 +36,8 @@ func _ready() -> void:
 	swiper.landed.connect(start_major_hitstop);
 	shooter = get_node("Shooter");
 	shooter.landed.connect(start_minor_hitstop);
+	splasher = get_node("Splasher");
+	splasher.landed.connect(start_major_hitstop);
 	hitstop = get_node("Hitstop");
 	camera = get_tree().get_root().get_node("Playground/Camera");
 	
@@ -58,4 +61,5 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("game_attack"):
 		var direction = orbital.global_position - global_position;
 		#swiper.swipe(direction);
-		shooter.shoot(direction);
+		#shooter.shoot(direction);
+		splasher.splash();

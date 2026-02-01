@@ -7,7 +7,7 @@ var mask: int;
 @export
 var damage: float = 25;
 @export
-var range: float = 400;
+var extent: float = 400;
 @export
 var arc: float = PI/2;
 @export
@@ -51,7 +51,7 @@ func _physics_process(delta: float) -> void:
 		
 	time += delta;
 	var t = time / duration;
-	var radius = range * t;
+	var radius = extent * t;
 	hitfield.get_node("CollisionShape2D").shape.radius = radius;
 	
 	for other in hitfield.get_overlapping_bodies():
@@ -79,7 +79,7 @@ func _draw():
 	if not swiping:
 		return;
 	var t = time / duration;
-	var radius = range * t;
+	var radius = extent * t;
 	var attack_angle = direction.angle() - body.rotation;
 	draw_arc(
 		Vector2.ZERO, radius,
