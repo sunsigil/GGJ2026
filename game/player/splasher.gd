@@ -85,6 +85,7 @@ func _physics_process(delta: float) -> void:
 		splashing = false;
 
 func _draw():
+	return
 	if not splashing:
 		return;
 	var t = time / duration;

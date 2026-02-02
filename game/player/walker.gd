@@ -54,6 +54,7 @@ func walk(delta):
 	gizmos_dirty = true;
 	
 func _draw():
+	return;
 	if not gizmos_dirty:
 		return;
 	var scale_factor = 200;

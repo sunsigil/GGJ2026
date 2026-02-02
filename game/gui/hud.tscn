@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://cok47xfsko3eg"]
+
+[ext_resource type="Texture2D" uid="uid://bgeo3bce7smt1" path="res://gui/mask_holder.png" id="1_350da"]
+[ext_resource type="Script" uid="uid://nmi78tddsf2o" path="res://gui/hud.gd" id="1_nejoa"]
+[ext_resource type="Texture2D" uid="uid://jfipwybfudk2" path="res://materials/masks/plain/mask_front.png" id="2_u7rvv"]
+[ext_resource type="Texture2D" uid="uid://b5k5t3ugt60d8" path="res://materials/masks/dash/mask_front.png" id="3_og2wy"]
+[ext_resource type="Texture2D" uid="uid://c3w1rmupt5c7r" path="res://materials/masks/shoot/mask_front.png" id="4_580ub"]
+[ext_resource type="Texture2D" uid="uid://bv1hm3fqb36fr" path="res://gui/resurrect.png" id="4_hqwf2"]
+[ext_resource type="Texture2D" uid="uid://cjjovrj8bnjvy" path="res://materials/masks/splash/mask_lens.png" id="5_580ub"]
+
+[node name="Hud" type="Control" unique_id=1454493127 node_paths=PackedStringArray("cooldown_bar", "mask_holder", "mask_img", "resurrect_img")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nejoa")
+plain_mask = ExtResource("2_u7rvv")
+dash_mask = ExtResource("3_og2wy")
+shoot_mask = ExtResource("4_580ub")
+splash_mask = ExtResource("5_580ub")
+cooldown_bar = NodePath("Cooldown")
+mask_holder = NodePath("MaskHolder")
+mask_img = NodePath("MaskHolder/Mask")
+resurrect_img = NodePath("Resurrect")
+
+[node name="Cooldown" type="ColorRect" parent="." unique_id=1086643741]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1057.0
+
+[node name="MaskHolder" type="TextureRect" parent="." unique_id=1194142980]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.010000001
+anchor_top = 0.76600003
+anchor_right = 0.119
+anchor_bottom = 0.9480001
+offset_left = -7.199997
+offset_top = -0.2800293
+offset_right = 1054.1082
+offset_bottom = 1073.748
+scale = Vector2(0.17, 0.17)
+texture = ExtResource("1_350da")
+
+[node name="Mask" type="TextureRect" parent="MaskHolder" unique_id=1122619751]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.158
+anchor_top = 0.157
+anchor_right = 0.83800006
+anchor_bottom = 0.82900006
+offset_left = 134.54114
+offset_top = 29.929398
+offset_right = -123.57654
+offset_bottom = -31.240662
+texture = ExtResource("2_u7rvv")
+
+[node name="Resurrect" type="TextureRect" parent="." unique_id=1519107713]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 212.0
+offset_top = 169.0
+offset_right = 1978.0
+offset_bottom = 83.0
+scale = Vector2(0.399, 0.4)
+texture = ExtResource("4_hqwf2")

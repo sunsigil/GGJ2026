@@ -12,6 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://38c04n7y6jo4" path="res://entity/drops/dash_drop.tscn" id="10_h1jm5"]
 [ext_resource type="PackedScene" uid="uid://wh3pgbb6fxgr" path="res://entity/drops/shoot_drop.tscn" id="11_pio1y"]
 [ext_resource type="PackedScene" uid="uid://cb3xiyyb0gabt" path="res://entity/drops/splash_drop.tscn" id="12_te8jg"]
+[ext_resource type="PackedScene" uid="uid://ccbuy8mvyewbc" path="res://entity/kill_volume.tscn" id="13_f7pug"]
+[ext_resource type="PackedScene" uid="uid://cok47xfsko3eg" path="res://gui/hud.tscn" id="13_yjl7g"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_is3ju"]
 radius = 170.37175
@@ -40,6 +42,9 @@ size = Vector2(74.93674, 79.92474)
 size = Vector2(233.44759, 181.40022)
 
 [node name="Playground" type="Node2D" unique_id=1159659867]
+
+[node name="KillVolume" parent="." unique_id=1142128571 instance=ExtResource("13_f7pug")]
+position = Vector2(800, -3801)
 
 [node name="Player" parent="." unique_id=395614979 instance=ExtResource("4_is3ju")]
 
@@ -72,8 +77,8 @@ position = Vector2(-1822, 2508)
 [node name="SmallSpawner7" parent="Spawners/Small" unique_id=311131795 instance=ExtResource("6_4bqqs")]
 position = Vector2(-1323, -1514)
 
-[node name="HudisonSpawner" parent="Spawners/Small" unique_id=988531268 instance=ExtResource("4_pi42a")]
-position = Vector2(2001, 4533)
+[node name="SmallSpawner8" parent="Spawners/Small" unique_id=663855182 instance=ExtResource("6_4bqqs")]
+position = Vector2(1981, 505)
 
 [node name="Medium" type="Node" parent="Spawners" unique_id=844203918]
 
@@ -97,6 +102,15 @@ position = Vector2(-1638, 4047)
 [node name="LargeSpawner2" parent="Spawners/Large" unique_id=1251163421 instance=ExtResource("8_pi42a")]
 position = Vector2(-2849, -1205)
 
+[node name="HudisonSpawner" parent="Spawners" unique_id=14894330 instance=ExtResource("4_pi42a")]
+position = Vector2(-3456, -302)
+
+[node name="HudisonSpawner2" parent="Spawners" unique_id=1600706386 instance=ExtResource("4_pi42a")]
+position = Vector2(-685, -5248)
+
+[node name="HudisonSpawner3" parent="Spawners" unique_id=988531268 instance=ExtResource("4_pi42a")]
+position = Vector2(2001, 4533)
+
 [node name="Colliders" type="Node" parent="." unique_id=2067740291]
 
 [node name="BG" type="Sprite2D" parent="Colliders" unique_id=1935893460]
@@ -113,6 +127,7 @@ texture = ExtResource("5_4bqqs")
 metadata/_edit_lock_ = true
 
 [node name="Hints" type="Sprite2D" parent="Colliders" unique_id=751150033]
+visible = false
 z_index = 1
 position = Vector2(-94.00003, -1693.0001)
 scale = Vector2(2.188386, 2.188387)
@@ -343,20 +358,19 @@ scale = Vector2(2.1883867, 2.1883857)
 polygon = PackedVector2Array(-8.184798, -36.007324, 9.582572, -40.78247, 12.233798, 30.47705, -73.243256, 28.722656, -70.87122, -3.2939453, -30.283886, -10.617676)
 metadata/_edit_lock_ = true
 
-[node name="SmallSpawner" parent="." unique_id=663855182 instance=ExtResource("6_4bqqs")]
-position = Vector2(1981, 505)
+[node name="Drops" type="Node" parent="." unique_id=1366976410]
 
-[node name="DashDrop" parent="." unique_id=55314487 instance=ExtResource("10_h1jm5")]
-position = Vector2(1929, -1808)
+[node name="DashDrop" parent="Drops" unique_id=55314487 instance=ExtResource("10_h1jm5")]
+position = Vector2(1573, -393)
 
-[node name="shoot_drop" parent="." unique_id=67484017 instance=ExtResource("11_pio1y")]
+[node name="ShootDrop" parent="Drops" unique_id=67484017 instance=ExtResource("11_pio1y")]
 position = Vector2(790, 4313)
 
-[node name="SplashDrop" parent="." unique_id=1587777135 instance=ExtResource("12_te8jg")]
-position = Vector2(806, -3905)
+[node name="SplashDrop" parent="Drops" unique_id=1587777135 instance=ExtResource("12_te8jg")]
+position = Vector2(-1876, -1416)
 
-[node name="HudisonSpawner" parent="." unique_id=14894330 instance=ExtResource("4_pi42a")]
-position = Vector2(-3456, -302)
+[node name="GUI" type="Node" parent="." unique_id=1351999910]
 
-[node name="HudisonSpawner2" parent="." unique_id=1600706386 instance=ExtResource("4_pi42a")]
-position = Vector2(-685, -5248)
+[node name="CanvasLayer" type="CanvasLayer" parent="GUI" unique_id=1283250366]
+
+[node name="Hud" parent="GUI/CanvasLayer" unique_id=1454493127 instance=ExtResource("13_yjl7g")]

@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://ccbuy8mvyewbc"]
+
+[ext_resource type="Script" uid="uid://dk1nrwg8w4lgd" path="res://entity/kill_volume.gd" id="1_w0piv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m51tg"]
+resource_local_to_scene = true
+radius = 598.00085
+
+[node name="KillVolume" type="Area2D" unique_id=1142128571]
+collision_mask = 2
+script = ExtResource("1_w0piv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=777941895]
+shape = SubResource("CircleShape2D_m51tg")

@@ -27,7 +27,7 @@ shader_parameter/flash_period = 0.0
 resource_local_to_scene = true
 radius = 18.027756
 
-[sub_resource type="PackedScene" id="PackedScene_tqiix"]
+[sub_resource type="PackedScene" id="PackedScene_kb6p2"]
 resource_local_to_scene = true
 _bundled = {
 "conn_count": 0,
@@ -73,6 +73,7 @@ visible = false
 position = Vector2(11, -28)
 sprite_frames = ExtResource("2_boad6")
 autoplay = "default"
+frame_progress = 0.71698
 
 [node name="Body" type="Sprite2D" parent="." unique_id=1182604590]
 visible = false
@@ -89,7 +90,7 @@ arc = 3.14
 duration = null
 
 [node name="Shooter" parent="." unique_id=837086268 instance=ExtResource("10_8t03j")]
-bullet = SubResource("PackedScene_tqiix")
+bullet = SubResource("PackedScene_kb6p2")
 
 [node name="Masker" parent="." unique_id=835421663 instance=ExtResource("12_ebec5")]
 visible = false

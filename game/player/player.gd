@@ -26,6 +26,21 @@ var alive: bool;
 var living: bool;
 var dying: bool;
 
+func get_universal_cooldown():
+	var object = null;
+	match masker.get_mask():
+		Enums.MaskType.PLAIN:
+			object = swiper;
+		Enums.MaskType.DASH:
+			object = dasher;
+		Enums.MaskType.SHOOT:
+			object = shooter;
+		Enums.MaskType.SPLASH:
+			object = splasher;
+	if object == null:
+		return 0.0;
+	return 1.0 - (object.cooldown.time_left/object.cooldown.wait_time);
+
 func start_hitstop(slow, slow_time, shake, shake_time):
 	if slow_time > 0:
 		Engine.time_scale = slow;
@@ -87,7 +102,8 @@ func die():
 
 	core_sprite.visible = false;
 	leg_sprite.visible = false;
-	await hitstop.timeout;
+	if not hitstop.is_stopped():
+		await hitstop.timeout;
 	
 	flame_sprite.stop();
 	flame_sprite.play("death");
