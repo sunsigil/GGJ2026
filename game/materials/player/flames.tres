@@ -1,15 +1,44 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://bs0gwltvftdf6"]
 
+[ext_resource type="Texture2D" uid="uid://cudg2mt8bwide" path="res://materials/player/death/1.png" id="1_gqwi7"]
 [ext_resource type="Texture2D" uid="uid://bi5r4c17qpny8" path="res://materials/player/flames/1.png" id="1_jiafj"]
+[ext_resource type="Texture2D" uid="uid://ryepxdtvp38e" path="res://materials/player/death/2.png" id="2_dqq6j"]
 [ext_resource type="Texture2D" uid="uid://b5n1drr6j1oet" path="res://materials/player/flames/2.png" id="2_evbrq"]
+[ext_resource type="Texture2D" uid="uid://cibcsqk1cgtj5" path="res://materials/player/death/3.png" id="3_67bot"]
 [ext_resource type="Texture2D" uid="uid://c5k2qcsoeesx3" path="res://materials/player/flames/3.png" id="3_jo4vd"]
+[ext_resource type="Texture2D" uid="uid://bck7syhxlmh8d" path="res://materials/player/death/4.png" id="4_jlh3y"]
 [ext_resource type="Texture2D" uid="uid://lexsdygh8gk2" path="res://materials/player/flames/4.png" id="4_ly2gf"]
 [ext_resource type="Texture2D" uid="uid://dd8afff66dp74" path="res://materials/player/flames/5.png" id="5_iyogu"]
+[ext_resource type="Texture2D" uid="uid://b6vgfws2os3oo" path="res://materials/player/death/5.png" id="5_luw0x"]
 [ext_resource type="Texture2D" uid="uid://dwo874rnshrh1" path="res://materials/player/flames/6.png" id="6_5nty2"]
+[ext_resource type="Texture2D" uid="uid://qko5l3o3wt27" path="res://materials/player/death/6.png" id="6_l3fto"]
 [ext_resource type="Texture2D" uid="uid://bkhnx0u126mdn" path="res://materials/player/flames/7.png" id="7_gqwi7"]
 
 [resource]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_gqwi7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_dqq6j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_67bot")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_jlh3y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_luw0x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_l3fto")
+}],
+"loop": false,
+"name": &"death",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_jiafj")

@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://dtgywicxqs50"]
+
+[ext_resource type="Script" uid="uid://60w6hg83fjab" path="res://entity/enemies/enemy.gd" id="1_vhaig"]
+[ext_resource type="PackedScene" uid="uid://qrha35uio2p3" path="res://entity/enemies/boid.tscn" id="2_8nl2g"]
+[ext_resource type="Script" uid="uid://b6ao3g32l7aqs" path="res://entity/enemies/lifeforce.gd" id="3_buf2c"]
+[ext_resource type="PackedScene" uid="uid://bubnuarqpaj3p" path="res://player/swiper.tscn" id="4_iq2lt"]
+[ext_resource type="PackedScene" uid="uid://d1veis2g615fh" path="res://player/shooter.tscn" id="5_ijtpk"]
+[ext_resource type="PackedScene" uid="uid://b68aofthx277r" path="res://player/splasher.tscn" id="6_258jw"]
+[ext_resource type="Script" uid="uid://cgxxoalmxsnf2" path="res://player/bullet.gd" id="6_buf2c"]
+[ext_resource type="SpriteFrames" uid="uid://ce15nljvmxpcm" path="res://materials/bullet/bullet.tres" id="7_iq2lt"]
+[ext_resource type="SpriteFrames" uid="uid://cfw6bec5lik48" path="res://materials/mob/mob.tres" id="7_rgv27"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iemci"]
+resource_local_to_scene = true
+radius = 63.007935
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7vc4j"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ijtpk"]
+resource_local_to_scene = true
+radius = 18.027756
+
+[sub_resource type="PackedScene" id="PackedScene_buf2c"]
+resource_local_to_scene = true
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"id_paths": [],
+"names": PackedStringArray("Bullet", "script", "damage", "speed", "bullet", "Node2D", "Hitbox", "collision_layer", "Area2D", "CollisionShape2D", "shape", "AnimatedSprite2D", "sprite_frames"),
+"node_count": 4,
+"node_ids": PackedInt32Array(297301747, 1219042183, 844365723, 421473666),
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 5, 0, -1, 3, 1, 0, 2, 1, 3, 2, 1, 4, 0, 0, 8, 6, -1, 1, 7, 3, 0, 1, 0, 9, 9, -1, 1, 10, 4, 0, 0, 0, 11, 11, -1, 1, 12, 5, 0),
+"variants": [ExtResource("6_buf2c"), 25.0, 800.0, 8, SubResource("CircleShape2D_ijtpk"), ExtResource("7_iq2lt")],
+"version": 3
+}
+
+[node name="Enemy" type="CharacterBody2D" unique_id=2072336256 groups=["boid", "enemy"]]
+collision_layer = 4
+script = ExtResource("1_vhaig")
+swivel = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2120428734]
+shape = SubResource("CircleShape2D_iemci")
+
+[node name="Boid" parent="." unique_id=1708033716 instance=ExtResource("2_8nl2g")]
+
+[node name="Lifeforce" type="Node2D" parent="." unique_id=200005520]
+script = ExtResource("3_buf2c")
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=501736169]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1657314520]
+shape = SubResource("CircleShape2D_7vc4j")
+
+[node name="Swiper" parent="." unique_id=1605956003 instance=ExtResource("4_iq2lt")]
+mask = 2
+extent = 300.0
+arc = 1.0
+
+[node name="Shooter" parent="." unique_id=837086268 instance=ExtResource("5_ijtpk")]
+mask = 3
+bullet = SubResource("PackedScene_buf2c")
+
+[node name="Splasher" parent="." unique_id=1390973351 instance=ExtResource("6_258jw")]
+extent = 300.0
+duration = 0.5
+mask = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1715057357]
+position = Vector2(11.999998, 1.0000002)
+rotation = -0.6095498
+scale = Vector2(0.75000006, 0.75000006)
+sprite_frames = ExtResource("7_rgv27")
+animation = &"walk"
+autoplay = "walk"
+
+[node name="AttackCooldown" type="Timer" parent="." unique_id=127148942]
+
+[node name="KnockbackTimer" type="Timer" parent="." unique_id=159017392]
+wait_time = 0.1

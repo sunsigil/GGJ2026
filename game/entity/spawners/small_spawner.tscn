@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://beo2fd3d2xp77"]
+
+[ext_resource type="PackedScene" uid="uid://ct32260c6xtbk" path="res://entity/spawners/area_spawner.tscn" id="1_ddypl"]
+
+[node name="SmallSpawner" unique_id=928594478 instance=ExtResource("1_ddypl")]
+trigger_radius = 450.0
+spawn_radius = 300.0
+capacity = 3

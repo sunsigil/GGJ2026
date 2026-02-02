@@ -5,6 +5,8 @@
 [ext_resource type="SpriteFrames" uid="uid://b0pa63lyaor1c" path="res://materials/masks/dash/dash_mask.tres" id="2_0qxr1"]
 [ext_resource type="SpriteFrames" uid="uid://cyb8ybqck8lpr" path="res://materials/masks/none/no_mask.tres" id="3_r04cd"]
 [ext_resource type="SpriteFrames" uid="uid://bc38lt85ul52q" path="res://materials/masks/plain/plain_mask.tres" id="4_7sm4c"]
+[ext_resource type="SpriteFrames" uid="uid://35oix026hpvb" path="res://materials/masks/shoot/shoot_mask.tres" id="6_3bek6"]
+[ext_resource type="SpriteFrames" uid="uid://bgmvoqdmj6ffn" path="res://materials/masks/splash/splash_mask.tres" id="7_nv0md"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7sm4c"]
 shader = ExtResource("1_dtchp")
@@ -18,5 +20,5 @@ script = ExtResource("1_kcowh")
 none_mask = ExtResource("3_r04cd")
 plain_mask = ExtResource("4_7sm4c")
 dash_mask = ExtResource("2_0qxr1")
-shoot_mask = ExtResource("2_0qxr1")
-splash_mask = ExtResource("2_0qxr1")
+shoot_mask = ExtResource("6_3bek6")
+splash_mask = ExtResource("7_nv0md")

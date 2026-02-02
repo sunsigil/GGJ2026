@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cb3xiyyb0gabt"]
+
+[ext_resource type="PackedScene" uid="uid://c4aoxl1xv364a" path="res://entity/drops/mask_drop.tscn" id="1_caius"]
+[ext_resource type="Texture2D" uid="uid://0g6pyxhtxg0u" path="res://materials/masks/splash/mask_front.png" id="2_a85a3"]
+
+[node name="SplashDrop" unique_id=55314487 instance=ExtResource("1_caius")]
+mask = 3
+
+[node name="Sprite2D" parent="." index="1" unique_id=1681930858]
+texture = ExtResource("2_a85a3")

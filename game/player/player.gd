@@ -14,11 +14,17 @@ var camera;
 var hurt_cooldown: Timer;
 var rally_timeout: Timer;
 var relief_timeout: Timer;
+
 var core_sprite: Sprite2D;
+var flame_sprite: AnimatedSprite2D;
+var leg_sprite: AnimatedSprite2D;
 
 var attack_queue: Array[Attack];
-var alive: bool;
 var rally_targets: Array[Node2D];
+
+var alive: bool;
+var living: bool;
+var dying: bool;
 
 func start_hitstop(slow, slow_time, shake, shake_time):
 	if slow_time > 0:
@@ -57,9 +63,36 @@ func rally_against(targets):
 	rally_targets = [];
 	await relief_timeout.timeout;
 	masker.stabilize();
+	
+func live():
+	if living:
+		return;
+	living = true;
 
+	flame_sprite.visible = true;
+	flame_sprite.stop();
+	flame_sprite.play_backwards("death");
+	await flame_sprite.animation_finished;
+
+	core_sprite.visible = true;
+	leg_sprite.visible = true;
+	masker.visible = true;
+	alive = true;
+	flame_sprite.play("default");
+	
 func die():
+	if dying:
+		return;
+	dying = true;
+
+	core_sprite.visible = false;
+	leg_sprite.visible = false;
 	await hitstop.timeout;
+	
+	flame_sprite.stop();
+	flame_sprite.play("death");
+	await flame_sprite.animation_finished;
+	
 	get_tree().reload_current_scene();
 
 func queue_attack(attack: Attack):
@@ -78,7 +111,7 @@ func handle_attacks():
 		rally_candidates.append(attack.owner);
 		attack_queue.pop_front();
 	hurtstop_callback();
-	if masker.get_mask() == masker.MaskType.NONE:
+	if masker.get_mask() == Enums.MaskType.NONE:
 		die();
 	else:
 		masker.destabilize();
@@ -104,9 +137,6 @@ func _ready() -> void:
 	splasher.landed.connect(major_hitstop_callback);
 
 	masker = get_node("Masker");
-	masker.unlock(masker.MaskType.DASH);
-	masker.unlock(masker.MaskType.SHOOT);
-	masker.unlock(masker.MaskType.SPLASH);
 
 	camera = get_tree().get_root().get_node("Playground/Camera");
 	hitstop = get_node("Hitstop");
@@ -114,18 +144,27 @@ func _ready() -> void:
 	rally_timeout = get_node("RallyTimeout");
 	relief_timeout = get_node("ReliefTimeout");
 	core_sprite = get_node("Body");
+	flame_sprite = get_node("Flames");
+	leg_sprite = get_node("Legs");
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	core_sprite.material.set_shader_parameter("flash_period",
-		0.25 if masker.danger_critical() else 0.0
-	);
-	pass;
+	if masker.is_mask_lost():
+		core_sprite.material.set_shader_parameter("flash_colour", Vector4(1.0, 0.0, 0.5, 1.0));
+		core_sprite.material.set_shader_parameter("flash_period", 0.25);
+	elif masker.is_mask_endangered():
+		core_sprite.material.set_shader_parameter("flash_colour", Vector4(0.25, 0.75, 0.85, 1.0));
+		core_sprite.material.set_shader_parameter("flash_period", 0.5);
+	else:
+		core_sprite.material.set_shader_parameter("flash_colour", Vector4(1.0, 1.0, 1.0, 1.0));
+		core_sprite.material.set_shader_parameter("flash_period", 0.0);
 	
 func _physics_process(delta):
 	if not alive:
 		if Input.is_action_just_pressed("game_progress"):
-			alive = true;
+			live();
+		return;
+	if dying:
 		return;
 	
 	handle_attacks();
@@ -140,11 +179,11 @@ func _physics_process(delta):
 			masker.cycle();
 		if Input.is_action_just_pressed("game_progress"):
 			match masker.get_mask():
-				masker.MaskType.DASH:
+				Enums.MaskType.DASH:
 					dasher.dash(velocity);
-				masker.MaskType.SHOOT:
+				Enums.MaskType.SHOOT:
 					shooter.shoot(mask_direction);
-				masker.MaskType.SPLASH:
+				Enums.MaskType.SPLASH:
 					splasher.splash();
 				_:
 					swiper.swipe(mask_direction);				

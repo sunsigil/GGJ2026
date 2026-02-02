@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dx8h86r2tkif6"]
+
+[ext_resource type="PackedScene" uid="uid://dtgywicxqs50" path="res://entity/enemies/enemy.tscn" id="1_e8wq8"]
+[ext_resource type="Texture2D" uid="uid://jfipwybfudk2" path="res://materials/masks/plain/mask_front.png" id="2_fvww4"]
+
+[node name="SwiperEnemy" unique_id=2072336256 instance=ExtResource("1_e8wq8")]
+
+[node name="Splasher" parent="." index="6" unique_id=1390973351]
+extent = 200.0
+
+[node name="BlankMask" type="Sprite2D" parent="." index="8" unique_id=156457526]
+position = Vector2(-7, 22)
+scale = Vector2(0.69, 0.69)
+texture = ExtResource("2_fvww4")

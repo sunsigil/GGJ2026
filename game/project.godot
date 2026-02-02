@@ -17,7 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-PlayerData="*uid://b5r6tfw3oy8k7"
+Enums="*uid://b3u1mnbu3e46g"
+PlayerData="*uid://1ejh3i8e2blg"
 
 [display]
 
@@ -31,6 +32,7 @@ window/stretch/mode="viewport"
 player=""
 enemy=""
 boid=""
+bullet=""
 
 [input]
 

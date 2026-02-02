@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://bpapxb76wdagd"]
+
+[ext_resource type="PackedScene" uid="uid://dtgywicxqs50" path="res://entity/enemies/enemy.tscn" id="1_t37ss"]
+[ext_resource type="PackedScene" uid="uid://cbded5pntuvwa" path="res://entity/hudison_bullet.tscn" id="2_2p12y"]
+[ext_resource type="SpriteFrames" uid="uid://chvdket0838vh" path="res://materials/hudison/hudison.tres" id="2_ou1pn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2p12y"]
+resource_local_to_scene = true
+radius = 173.04623
+
+[node name="Hudison" unique_id=2072336256 instance=ExtResource("1_t37ss")]
+type = 3
+
+[node name="CollisionShape2D" parent="." index="0" unique_id=2120428734]
+shape = SubResource("CircleShape2D_2p12y")
+
+[node name="Lifeforce" parent="." index="2" unique_id=200005520]
+max_health = 600.0
+
+[node name="Shooter" parent="." index="5" unique_id=837086268]
+bullet = ExtResource("2_2p12y")
+
+[node name="AnimatedSprite2D" parent="." index="7" unique_id=1715057357]
+position = Vector2(64, -64)
+rotation = 0.0
+scale = Vector2(1.36, 1.36)
+sprite_frames = ExtResource("2_ou1pn")
+animation = &"default"
+autoplay = ""
+frame_progress = 0.19871838
+
+[node name="AttackCooldown" parent="." index="8" unique_id=127148942]
+wait_time = 0.1

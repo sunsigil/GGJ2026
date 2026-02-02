@@ -49,9 +49,6 @@ func _ready() -> void:
 	hitfield = get_node("Hitfield");
 	hitfield.collision_mask = mask;
 	cooldown = get_node("Cooldown");
-	
-func _process(delta):
-	queue_redraw();
 
 func _physics_process(delta: float) -> void:
 	if not swiping:
@@ -66,11 +63,7 @@ func _physics_process(delta: float) -> void:
 	var query = PhysicsRayQueryParameters2D.create(ray_start, ray_end, mask);
 
 	var result = space.intersect_ray(query);
-	if(
-		result and
-		result.collider is CharacterBody2D and
-		not result.collider in hit_record
-	):
+	if result and result.collider is CharacterBody2D and not result.collider in hit_record:
 		var attack = Attack.new(
 			body,
 			body.global_position, direction,
@@ -86,15 +79,4 @@ func _physics_process(delta: float) -> void:
 		swiping = false;
 
 	global_rotation = direction.angle();
-		
-func _draw():
-	return;
-	if not swiping:
-		return;
-	var t = time / duration;
-	var central_angle = 0;
-	var angle = lerp(central_angle + arc/2, central_angle - arc/2, t);
-	var ray_start = Vector2.ZERO;
-	var ray_end = Vector2.from_angle(angle) * extent;
-	draw_line(ray_start, ray_end, Color.WHITE);
 	

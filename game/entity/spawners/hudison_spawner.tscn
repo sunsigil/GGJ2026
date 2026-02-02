@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dfcgsch50cdxw"]
+
+[ext_resource type="PackedScene" uid="uid://c3byvsma7wkm4" path="res://entity/spawners/point_spawner.tscn" id="1_xr0eo"]
+[ext_resource type="PackedScene" uid="uid://bpapxb76wdagd" path="res://entity/enemies/hudison.tscn" id="2_ysxr1"]
+
+[node name="HudisonSpawner" unique_id=988531268 instance=ExtResource("1_xr0eo")]
+resource = ExtResource("2_ysxr1")

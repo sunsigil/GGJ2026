@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://o2svwsl2jmu5"]
+
+[ext_resource type="PackedScene" uid="uid://dtgywicxqs50" path="res://entity/enemies/enemy.tscn" id="1_0xo8g"]
+[ext_resource type="Texture2D" uid="uid://c3w1rmupt5c7r" path="res://materials/masks/shoot/mask_front.png" id="2_hoadb"]
+[ext_resource type="Script" uid="uid://cgxxoalmxsnf2" path="res://player/bullet.gd" id="2_hu0w6"]
+[ext_resource type="SpriteFrames" uid="uid://ce15nljvmxpcm" path="res://materials/bullet/bullet.tres" id="3_r1ppl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r1ppl"]
+resource_local_to_scene = true
+radius = 63.007935
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ijtpk"]
+resource_local_to_scene = true
+radius = 18.027756
+
+[sub_resource type="PackedScene" id="PackedScene_hl3ky"]
+resource_local_to_scene = true
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"id_paths": [],
+"names": PackedStringArray("Bullet", "script", "damage", "speed", "bullet", "Node2D", "Hitbox", "collision_layer", "Area2D", "CollisionShape2D", "shape", "AnimatedSprite2D", "sprite_frames"),
+"node_count": 4,
+"node_ids": PackedInt32Array(297301747, 1219042183, 844365723, 421473666),
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 5, 0, -1, 3, 1, 0, 2, 1, 3, 2, 1, 4, 0, 0, 8, 6, -1, 1, 7, 3, 0, 1, 0, 9, 9, -1, 1, 10, 4, 0, 0, 0, 11, 11, -1, 1, 12, 5, 0),
+"variants": [ExtResource("2_hu0w6"), 25.0, 800.0, 8, SubResource("CircleShape2D_ijtpk"), ExtResource("3_r1ppl")],
+"version": 3
+}
+
+[node name="ShooterEnemy" unique_id=2072336256 instance=ExtResource("1_0xo8g")]
+type = 1
+
+[node name="CollisionShape2D" parent="." index="0" unique_id=2120428734]
+shape = SubResource("CircleShape2D_r1ppl")
+
+[node name="Boid" parent="." index="1" unique_id=1708033716]
+min_speed = 50.0
+max_speed = 200.0
+visual_range = 1000.0
+
+[node name="Shooter" parent="." index="5" unique_id=837086268]
+bullet = SubResource("PackedScene_hl3ky")
+
+[node name="Mask" type="Sprite2D" parent="." index="8" unique_id=365329595]
+position = Vector2(-8, 30)
+scale = Vector2(0.79, 0.79)
+texture = ExtResource("2_hoadb")

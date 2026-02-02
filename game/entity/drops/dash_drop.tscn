@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://38c04n7y6jo4"]
+
+[ext_resource type="PackedScene" uid="uid://c4aoxl1xv364a" path="res://entity/drops/mask_drop.tscn" id="1_5p4et"]
+[ext_resource type="Texture2D" uid="uid://b5k5t3ugt60d8" path="res://materials/masks/dash/mask_front.png" id="2_nof2f"]
+
+[node name="DashDrop" unique_id=55314487 instance=ExtResource("1_5p4et")]
+mask = 1
+
+[node name="Sprite2D" parent="." index="1" unique_id=1681930858]
+texture = ExtResource("2_nof2f")

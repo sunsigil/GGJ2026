@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c3byvsma7wkm4"]
 
-[ext_resource type="Script" uid="uid://ck8hwq3md73yq" path="res://entity/point_spawner.gd" id="1_flmor"]
+[ext_resource type="Script" uid="uid://ck8hwq3md73yq" path="res://entity/spawners/point_spawner.gd" id="1_flmor"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_flmor"]
 radius = 400.0

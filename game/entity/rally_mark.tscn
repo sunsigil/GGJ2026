@@ -1,9 +1,16 @@
 [gd_scene format=3 uid="uid://bssk63k0c1bxt"]
 
 [ext_resource type="SpriteFrames" uid="uid://draohpyjtyhgx" path="res://materials/rally_mark.tres" id="1_pydet"]
+[ext_resource type="Texture2D" uid="uid://2fx6qm6qohny" path="res://materials/ring.png" id="2_cfp8w"]
 
 [node name="RallyMark" type="AnimatedSprite2D" unique_id=1236400837]
-scale = Vector2(0.5, 0.5)
+modulate = Color(1, 0.1938262, 0.39580625, 1)
+scale = Vector2(0.75, 0.75)
 sprite_frames = ExtResource("1_pydet")
 autoplay = "default"
 frame_progress = 0.51555693
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=236215529]
+position = Vector2(-1.3333334, 8)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_cfp8w")

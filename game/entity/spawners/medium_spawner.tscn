@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://dvbcutejo0ofq"]
+
+[ext_resource type="PackedScene" uid="uid://ct32260c6xtbk" path="res://entity/spawners/area_spawner.tscn" id="1_h0oo8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h0oo8"]
+resource_local_to_scene = true
+radius = 568.00085
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fu6ib"]
+resource_local_to_scene = true
+radius = 244.07376
+
+[node name="MediumSpawner" unique_id=928594478 instance=ExtResource("1_h0oo8")]
+trigger_radius = 600.0
+spawn_radius = 450.0
+wait = 0.5
+
+[node name="CollisionShape2D" parent="TriggerArea" parent_id_path=PackedInt32Array(1815192807) index="0" unique_id=114908085]
+shape = SubResource("CircleShape2D_h0oo8")
+
+[node name="CollisionShape2D" parent="SpawnArea" parent_id_path=PackedInt32Array(680181846) index="0" unique_id=570257474]
+shape = SubResource("CircleShape2D_fu6ib")

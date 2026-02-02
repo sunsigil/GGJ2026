@@ -1,15 +1,22 @@
 [gd_scene format=3 uid="uid://ct32260c6xtbk"]
 
-[ext_resource type="Script" uid="uid://0pngorj6qx0x" path="res://entity/area_spawner.gd" id="1_e6m2s"]
+[ext_resource type="Script" uid="uid://0pngorj6qx0x" path="res://entity/spawners/area_spawner.gd" id="1_e6m2s"]
+[ext_resource type="PackedScene" uid="uid://dx8h86r2tkif6" path="res://entity/enemies/swiper_enemy.tscn" id="2_riao8"]
+[ext_resource type="PackedScene" uid="uid://o2svwsl2jmu5" path="res://entity/enemies/shooter_enemy.tscn" id="3_ptlsp"]
+[ext_resource type="PackedScene" uid="uid://mfxy5mkpkd2y" path="res://entity/enemies/splasher_enemy.tscn" id="4_kyc6j"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e6m2s"]
-radius = 800.0
+resource_local_to_scene = true
+radius = 417.57993
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oqqrr"]
-radius = 600.0
+resource_local_to_scene = true
+radius = 244.07376
 
 [node name="AreaSpawner" type="Node2D" unique_id=928594478]
 script = ExtResource("1_e6m2s")
+pool = Array[Resource]([ExtResource("2_riao8"), ExtResource("3_ptlsp"), ExtResource("4_kyc6j")])
+capacity = 5
 
 [node name="TriggerArea" type="Area2D" parent="." unique_id=1815192807]
 collision_mask = 2
